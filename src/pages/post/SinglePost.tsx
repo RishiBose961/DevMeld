@@ -14,6 +14,7 @@ const SinglePost = () => {
 
   if (isPending) return <div>Loading...</div>;
 
+
   return (
     <div className="space-y-6 mx-2 mt-2">
       {/* Header */}
@@ -106,7 +107,7 @@ const SinglePost = () => {
               ))}
             </ul>
             <Link
-              to={`/code-solution/${getSingleData._id}`}
+              to={`/code-solution/${getSingleData._id}/post/${getSingleData.postedBy._id}`}
               className="flex items-center space-x-2 mt-5"
             >
               <button className="bg-primary flex text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/80 transition-colors">

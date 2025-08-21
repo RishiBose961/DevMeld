@@ -9,9 +9,8 @@ import { useLocation } from "react-router";
 const Codesubmit = () => {
   const location = useLocation();
 
+  const postBy = location.pathname.split("/")[4];
   
-  const postBy = location.pathname.split("/")[2];
-
   const [language, setLanguage] = useState("java");
   const [code, setCode] = useState(boilerplates["java"]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
