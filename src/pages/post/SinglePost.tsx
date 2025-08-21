@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import UseSingleHook from "@/components/hook/postHook/UseSingleHook";
-import { Building2, Clock, Star, Users } from "lucide-react";
-import { useParams } from "react-router";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Codesubmit from "../code/Codesubmit";
 import TitleLink from "@/components/Link/TitleLink";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Building2, Clock, Code, Star, Users } from "lucide-react";
+import { Link, useParams } from "react-router";
 const SinglePost = () => {
   const { id } = useParams();
 
@@ -40,21 +39,21 @@ const SinglePost = () => {
             <Clock className="w-4 h-4" />
             <span className="text-sm">Time Estimate</span>
           </div>
-          <p className="font-semibold text-gray-900">sadsa</p>
+          <p className="font-semibold text-gray-900">{getSingleData?.duaration}</p>
         </div>
         <div className="bg-white p-4 rounded-lg border dark:border-gray-200 border-gray-600">
           <div className="flex items-center space-x-2 text-gray-600 mb-1">
             <Users className="w-4 h-4" />
             <span className="text-sm">Submissions</span>
           </div>
-          <p className="font-semibold text-gray-900">sadsada</p>
+          <p className="font-semibold text-gray-900">0/{getSingleData?.noofparticipants}</p>
         </div>
         <div className="bg-white p-4 rounded-lg border dark:border-gray-200 border-gray-600">
           <div className="flex items-center space-x-2 text-orange-600 mb-1">
             <Star className="w-4 h-4" />
             <span className="text-sm">Reward</span>
           </div>
-          <p className="font-semibold text-gray-900">sadsa credits</p>
+          <p className="font-semibold text-gray-900">{getSingleData?.credits} credits</p>
         </div>
       </div>
 
@@ -106,7 +105,15 @@ const SinglePost = () => {
                 <li>• {tech}</li>
               ))}
             </ul>
-            <Codesubmit />
+            <Link
+              to={`/code-solution/${getSingleData._id}`}
+              className="flex items-center space-x-2 mt-5"
+            >
+              <button className="bg-primary flex text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/80 transition-colors">
+                 <Code className="mx-3"/>Let me solve this  
+              </button>
+            </Link>
+           
           </div>
         </TabsContent>
         <TabsContent value="submission">

@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import { Header } from "./components/header/Header";
 import useAuthEffect from "./components/useAuthEffect";
 import SinglePost from "./pages/post/SinglePost";
+import Codesubmit from "./pages/code/Codesubmit";
 
 const App = () => {
   useAuthEffect();
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<div>Profile</div>} />
           <Route path="/p/:id" element={<SinglePost/>} />
+          <Route path="/code-solution/:id" element={<Codesubmit/>} />
         </Route>
       </Routes>
     </div>

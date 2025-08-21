@@ -1,29 +1,92 @@
+import Editor from "@monaco-editor/react";
+import { useState } from "react";
+import { boilerplates } from "./BoilerPlate";
+import { useMutation } from "@tanstack/react-query";
+import { createSubmissionSerivice } from "@/services/submissionapi";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router";
+
 const Codesubmit = () => {
+  const location = useLocation();
+
+  
+  const postBy = location.pathname.split("/")[2];
+
+  const [language, setLanguage] = useState("java");
+  const [code, setCode] = useState(boilerplates["java"]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { user } = useSelector((state: any) => state.auth);
+  const token = user?.token;
+  const mutation = useMutation({
+    mutationFn: (postData: { code: string; language: string, postId: string }) =>
+      createSubmissionSerivice(postData, token),
+    onSuccess: () => {
+      alert("Submission created successfully!");
+      // resetForm();
+    },
+    onError: (error: unknown) => {
+      if (error && typeof error === "object" && "message" in error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        alert((error as any).message || "Failed to create post.");
+      } else {
+        alert("Failed to create post.");
+      }
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    mutation.mutate({
+      code,
+      language,
+      postId:postBy,
+    });
+  };
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedLang = e.target.value as keyof typeof boilerplates;
+    setLanguage(selectedLang);
+    setCode(boilerplates[selectedLang]); // load boilerplate for selected language
+  };
+
   return (
-    <div className="border-t pt-6 mb-5">
-      <h4 className="font-medium  mb-4">Submit Your Solution</h4>
+    <div className="pt-6 mb-5">
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-white mb-2">
+          Select Language
+        </label>
+        <select
+          value={language}
+          onChange={handleLanguageChange}
+          className="bg-gray-800 text-white border border-gray-600 rounded-md px-3 py-2"
+        >
+          <option value="java">Java</option>
+          <option value="javascript">JavaScript</option>
+          <option value="typescript">TypeScript</option>
+          <option value="python">Python</option>
+          <option value="cpp">C++</option>
+          <option value="c">C</option>
+          <option value="go">Go</option>
+        </select>
+      </div>
+
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium  mb-2">
-            Solution Description
-          </label>
-          <textarea
-            placeholder="Explain your approach and key decisions..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            rows={3}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium  mb-2">
+          <label className="block text-sm font-medium mb-2">
             Code Solution
           </label>
-          <textarea
-            placeholder="Paste your code here..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
-            rows={12}
+          <Editor
+            height="50vh"
+            language={language}
+            theme="hc-black"
+            value={code}
+            onChange={(value) => setCode(value ?? "")}
           />
         </div>
-        <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]">
+        <button
+          onClick={handleSubmit}
+          className="bg-primary text-white font-bold px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
+        >
           Submit Solution
         </button>
       </div>
