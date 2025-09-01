@@ -4,6 +4,7 @@ interface PostData {
     code: string;
     language: string;
     postId: string;
+    topicId: string
 }
 
 export const createSubmissionSerivice = async (postData: PostData, token: string) => {

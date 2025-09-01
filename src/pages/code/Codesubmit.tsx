@@ -5,11 +5,20 @@ import { useMutation } from "@tanstack/react-query";
 import { createSubmissionSerivice } from "@/services/submissionapi";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
+import UseSubmited from "@/components/hook/validhook/UseSubmited";
 
 const Codesubmit = () => {
   const location = useLocation();
 
   const postBy = location.pathname.split("/")[4];
+  const topicId = location.pathname.split("/")[2];
+
+   const { isPending: loading, getValidSubmit } = UseSubmited(topicId as string) as {
+    isPending: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getValidSubmit: any;
+  };
+
   
   const [language, setLanguage] = useState("java");
   const [code, setCode] = useState(boilerplates["java"]);
@@ -17,7 +26,7 @@ const Codesubmit = () => {
   const { user } = useSelector((state: any) => state.auth);
   const token = user?.token;
   const mutation = useMutation({
-    mutationFn: (postData: { code: string; language: string, postId: string }) =>
+    mutationFn: (postData: { code: string; language: string, postId: string,topicId: string }) =>
       createSubmissionSerivice(postData, token),
     onSuccess: () => {
       alert("Submission created successfully!");
@@ -39,6 +48,7 @@ const Codesubmit = () => {
       code,
       language,
       postId:postBy,
+      topicId
     });
   };
 
@@ -82,12 +92,21 @@ const Codesubmit = () => {
             onChange={(value) => setCode(value ?? "")}
           />
         </div>
-        <button
+        {
+          loading ? (
+            <div>Loading...</div>
+          ) :  getValidSubmit?.value  ? (
+            <div className="p-4 bg-green-100 text-green-800 rounded-md">
+              You have already submitted a solution for this topic.
+            </div>
+          ) :  <button
           onClick={handleSubmit}
           className="bg-primary text-white font-bold px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
         >
           Submit Solution
         </button>
+        }
+       
       </div>
     </div>
   );
