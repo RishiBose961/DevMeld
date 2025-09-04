@@ -9,13 +9,13 @@ const TitleLink = ({ text, valuetext }: TitleLinkProps) => {
   // Match the @username at the end
   const match = text.match(/(.*?)(@\w+)$/);
 
-  if (!match) return <span className={`text-${valuetext}`}>{text}</span>; 
+  if (!match) return <span className={`text-${valuetext} font-semibold`}>{text}</span>; 
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, title, username] = match;
 
   return (
-    <span className={`text-${valuetext} text-white`}>
+    <span className={`text-${valuetext} font-semibold`}>
       {title}{" "}
       <Link
         to={`/${username}`}
