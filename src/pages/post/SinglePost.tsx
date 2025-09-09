@@ -2,6 +2,7 @@
 import UseSingleHook from "@/components/hook/postHook/UseSingleHook";
 import UseSubmited from "@/components/hook/validhook/UseSubmited";
 import TitleLink from "@/components/Link/TitleLink";
+import CountSubmission from "@/components/probelm/CountSubmission";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Clock, Code, Star, Users } from "lucide-react";
 import { Link, useParams } from "react-router";
@@ -30,6 +31,7 @@ const SinglePost = () => {
           <div className="flex items-center space-x-3 mb-2">
             <div>
               <TitleLink text={getSingleData?.title} valuetext={"2xl"} />
+             
 
               <div className="flex items-center space-x-2 mt-1">
                 <Building2 className="w-4 h-4 " />
@@ -56,8 +58,8 @@ const SinglePost = () => {
             <Users className="w-4 h-4" />
             <span className="text-sm">Submissions</span>
           </div>
-          <p className="font-semibold text-gray-900">
-            0/{getSingleData?.noofparticipants}
+          <p className="font-semibold text-gray-900 flex">
+            <CountSubmission topic={getSingleData?._id}/>/{getSingleData?.noofparticipants}
           </p>
         </div>
         <div className="bg-white p-4 rounded-lg border dark:border-gray-200 border-gray-600">

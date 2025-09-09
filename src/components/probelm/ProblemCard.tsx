@@ -1,7 +1,7 @@
 import { Building2, Clock, Users } from "lucide-react";
+import { Link } from "react-router";
 import UsePostHook from "../hook/postHook/UsePostHook";
 import TitleLink from "../Link/TitleLink";
-import { Link } from "react-router";
 import { Badge } from "../ui/badge";
 
 
@@ -64,7 +64,8 @@ const ProblemCard = () => {
                 </div>
                 <div className="flex items-center space-x-1">
                   <Users className="w-4 h-4" />
-                  <span>23 submissions</span>
+                  
+               
                 </div>
               </div>
 

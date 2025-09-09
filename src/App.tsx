@@ -7,6 +7,7 @@ import { Header } from "./components/header/Header";
 import useAuthEffect from "./components/useAuthEffect";
 import SinglePost from "./pages/post/SinglePost";
 import Codesubmit from "./pages/code/Codesubmit";
+import SearchPage from "./pages/Search/SearchPage";
 
 const App = () => {
   useAuthEffect();
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
+        <Route path="/search" element={<SearchPage/>} />
         <Route path="/*" element={<div>404</div>} />
 
         <Route path="" element={<PrivateRoute />}>

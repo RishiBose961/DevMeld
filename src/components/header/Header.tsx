@@ -1,7 +1,8 @@
-import { Bell, Code, Trophy, Users } from "lucide-react";
+import { Code, Search, Trophy, Users } from "lucide-react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { ModeToggle } from "../mode-toggle";
+import Notificationcomp from "../notification/Notificationcomp";
 import { Button } from "../ui/button";
 
 export const Header = () => {
@@ -15,9 +16,9 @@ export const Header = () => {
     }) => state.auth
   );
   const navItems = [
-    { id: "problems", label: "Problems", icon: Code },
-    { id: "leaderboard", label: "Leaderboard", icon: Trophy },
-    { id: "mentorship", label: "Mentorship", icon: Users },
+    { id: "problems", label: "Problems", icon: Code ,href:""},
+    { id: "leaderboard", label: "Leaderboard", icon: Trophy,href:"leaderboard" },
+    { id: "search", label: "Search", icon: Search, href:"search" },
   ];
 
   return (
@@ -37,25 +38,29 @@ export const Header = () => {
           </Link>
           {/* Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {navItems.map(({ id, label, icon: Icon }) => (
-              <button
-                key={id}
-                className="flex flex-col items-center py-2 px-4 text-xs font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
-              >
-                <Icon className="w-4 h-4" />
-                <span>{label}</span>
-              </button>
-            ))}
+           {navItems.map(({ id, label, icon: Icon, href }) => (
+                  <NavLink
+                    key={id}
+                    to={`/${href}`}
+                    className={({ isActive }) =>
+                      `flex flex-col items-center py-2 px-4 text-xs font-medium 
+         transition-all duration-300 ease-in-out
+         ${
+           isActive
+             ? "text-black bg-primary/50 rounded-xl dark:text-white font-semibold shadow-md"
+             : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
+         }`
+                    }
+                  >
+                    <Icon className="w-4 h-4 mb-1 transition-all duration-300" />
+                    <span className="transition-all duration-300">{label}</span>
+                  </NavLink>
+                ))}
           </nav>
 
           {/* User Section */}
           <div className="flex items-center space-x-4">
-            <button className="relative p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
-              <Bell className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full text-xs text-white flex items-center justify-center">
-                3
-              </span>
-            </button>
+            <Notificationcomp/>
 
             <ModeToggle />
             {isAuthenticated ? (

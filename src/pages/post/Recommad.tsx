@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Building2, Coins, Eye, User, Users } from "lucide-react";
+import { Building2, Coins, Eye, User } from "lucide-react";
 import { Link } from "react-router";
 
 const Recommad = () => {
@@ -113,11 +113,7 @@ const Recommad = () => {
                     <span className="sr-only">Credits:</span>
                     <span className="font-medium">{item.credits}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Users className="size-4 text-blue-600" aria-hidden />
-                    <span className="sr-only">Participants:</span>
-                    <span>0/{item.noofparticipants ?? "—"}</span>
-                  </div>
+                  
 
                   <Link to={`/p/${item._id}`} >
                     <Button className="cursor-pointer">
