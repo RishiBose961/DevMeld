@@ -58,9 +58,9 @@ const SinglePost = () => {
             <Users className="w-4 h-4" />
             <span className="text-sm">Submissions</span>
           </div>
-          <p className="font-semibold text-gray-900 flex">
+          <div className="font-semibold flex text-gray-900">
             <CountSubmission topic={getSingleData?._id}/>/{getSingleData?.noofparticipants}
-          </p>
+          </div>
         </div>
         <div className="bg-white p-4 rounded-lg border dark:border-gray-200 border-gray-600">
           <div className="flex items-center space-x-2 text-orange-600 mb-1">
@@ -123,7 +123,7 @@ const SinglePost = () => {
             </ul>
             {loading ? (
               <div>Loading...</div>
-            ) : getValidSubmit?.value  ? (
+            ) : getValidSubmit?.value   ? (
               <div className="mt-5 p-4 bg-green-100 text-green-800 rounded-lg">
                 You have already submitted a solution for this problem.
               </div>

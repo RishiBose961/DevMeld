@@ -11,7 +11,7 @@ const CountSubmission = (topic: { topic: string } ) => {
     if (isPending) return <div>Loading...</div>;
 
     return (
-        <div>{getCountSubmission}</div>
+        <div><p>{getCountSubmission}</p></div>
     )
 }
 

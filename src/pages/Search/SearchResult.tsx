@@ -26,9 +26,8 @@ const SearchResult = ({ getSearch }: SearchResultProps) => {
     return (
         <div className="grid grid-cols-3 mt-5 gap-4">{getSearch?.results.map((item, idx) => {
             if (item.title) {
-
                 return (
-                    <div key={idx} className="p-4 h-56 rounded-lg shadow">
+                    <div key={idx} className="p-4 h-56 ring-1 rounded-lg shadow">
 
                         <h2 className="text-lg font-bold">{item.title}</h2>
 
