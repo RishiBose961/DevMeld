@@ -1,4 +1,4 @@
-import UseRecommd from "@/components/hook/recommadationHook/UseRecommd";
+import UseSearchRecommd from "@/components/hook/recommadationHook/UseSearchRecommd";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,11 +10,10 @@ import {
 } from "@/components/ui/card";
 import { Building2, Coins, Eye, User } from "lucide-react";
 import { Link } from "react-router";
-
-const Recommad = () => {
-  const { isPending, getRecommad } = UseRecommd() as {
+const SearchRecommad = () => {
+  const { isPending, getSearchRecommd } = UseSearchRecommd() as {
     isPending: boolean;
-    getRecommad: Array<{
+    getSearchRecommd:Array<{
       _id: string;
       title: string;
       description: string;
@@ -28,19 +27,17 @@ const Recommad = () => {
       createdAt?: string;
       duration?: string;
     }>;
-  };
-
-  if (isPending) {
-    return <div>Loading...</div>;
   }
 
+  if (isPending) {
+    return <div>Loading...</div>
+  }
 
- 
   return (
-    <>
-      <p className="text-xl font-bold">Recommendation</p>
+    <div> {
+      getSearchRecommd?.length > 0 &&  <p className="text-xl font-bold">You might be interested in</p>} 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-3 mb-5">
-        {getRecommad?.map(
+        {Array.isArray(getSearchRecommd) && getSearchRecommd.map(
           (item: {
             _id: string;
             title: string;
@@ -113,7 +110,7 @@ const Recommad = () => {
                     <span className="sr-only">Credits:</span>
                     <span className="font-medium">{item.credits}</span>
                   </div>
-                  
+
 
                   <Link to={`/p/${item._id}`} >
                     <Button className="cursor-pointer">
@@ -131,9 +128,8 @@ const Recommad = () => {
             </Card>
           )
         )}
-      </div>
-    </>
-  );
-};
+      </div></div>
+  )
+}
 
-export default Recommad;
+export default SearchRecommad

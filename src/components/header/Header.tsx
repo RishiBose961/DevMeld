@@ -1,4 +1,4 @@
-import { Code, Search, Trophy, Users } from "lucide-react";
+import { Code, Search, Trophy } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router";
 import { ModeToggle } from "../mode-toggle";

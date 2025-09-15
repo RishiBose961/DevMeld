@@ -1,4 +1,4 @@
-import { Building2, Clock, Users } from "lucide-react";
+import { Building2, Clock, User2 } from "lucide-react";
 import { Link } from "react-router";
 import UsePostHook from "../hook/postHook/UsePostHook";
 import TitleLink from "../Link/TitleLink";
@@ -12,6 +12,7 @@ interface Problem {
   _id: string;
   postedBy: {
     companyName: string;
+    username: string;
   };
 }
 
@@ -63,8 +64,8 @@ const ProblemCard = () => {
                   <span>12</span>
                 </div>
                 <div className="flex items-center space-x-1">
-                  <Users className="w-4 h-4" />
-                  
+                  <User2 className="w-4 h-4" />
+                    <span>{problem?.postedBy?.username}</span>
                
                 </div>
               </div>

@@ -5,6 +5,7 @@ import { ScanQrCode, Search, SearchIcon, X } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useLocation, useSearchParams } from "react-router"
 import SearchResult from "./SearchResult"
+import SearchHistory from "./SearchHistory"
 
 const SearchPage = () => {
   const location = useLocation()
@@ -35,7 +36,7 @@ const SearchPage = () => {
     setSearchQuery(e.target.value)
   }
 
-  // run actual search (updates URL param)
+
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
       setSearchParams({ q: searchQuery })
@@ -49,10 +50,14 @@ const SearchPage = () => {
     setSearchParams({})
   }
 
-  // 🔹 Keep input in sync with query param (on back/forward navigation)
   useEffect(() => {
     setSearchQuery(queryParam)
   }, [queryParam])
+
+
+    if (isPending) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="flex-1 mt-10 mx-3 lg:mx-8">
@@ -135,6 +140,8 @@ const SearchPage = () => {
       </div>
 
       <SearchResult getSearch={getSearch} />
+
+      <SearchHistory/>
     </div>
   )
 }

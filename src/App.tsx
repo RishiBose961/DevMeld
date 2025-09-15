@@ -12,7 +12,7 @@ import SearchPage from "./pages/Search/SearchPage";
 const App = () => {
   useAuthEffect();
 
-  
+
   return (
     <div className="max-w-7xl mx-auto px-1">
       <Header />
@@ -20,13 +20,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/search" element={<SearchPage/>} />
+
         <Route path="/*" element={<div>404</div>} />
 
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<div>Profile</div>} />
-          <Route path="/p/:id" element={<SinglePost/>} />
-          <Route path="/code-solution/:id/post/:posted" element={<Codesubmit/>} />
+          <Route path="/p/:id" element={<SinglePost />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/code-solution/:id/post/:posted" element={<Codesubmit />} />
         </Route>
       </Routes>
     </div>

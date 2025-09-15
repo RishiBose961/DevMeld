@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { useSelector } from 'react-redux';
+import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
-const UseSearchHook = (querySearch: string) => {
-    const { user, isAuthenticated } = useSelector(
+const UseHistorySearch = () => {
+ const { user, isAuthenticated } = useSelector(
     (state: {
       auth: {
         isAuthenticated: boolean;
@@ -10,39 +10,35 @@ const UseSearchHook = (querySearch: string) => {
       };
     }) => state.auth
   );
-   const {
+  const {
     isPending,
     error,
     isError,
-    data: getSearch,
+    data: getSearchHistory,
   } = useQuery({
-    queryKey: ["getAllpost",querySearch],
+    queryKey: ["getSearchHistorys"],
     queryFn: async () => {
       return await fetch(
-        `http://localhost:5000/api/search?query=${querySearch}`,
+        `http://localhost:5000/api/history`,
         {
-          method: "POST",
-          headers:{
+          method: "GET",
+          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
-          }
-
+          },
         }
       ).then((res) => res.json());
     },
     enabled: isAuthenticated,
     staleTime: 10000,
- 
+
   });
 
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
 
-  return {
-    isPending,
-    getSearch,
-  };
+  return { isPending, search:getSearchHistory?.searchname };
 }
 
-export default UseSearchHook
+export default UseHistorySearch
