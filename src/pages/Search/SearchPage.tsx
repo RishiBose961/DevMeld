@@ -55,9 +55,6 @@ const SearchPage = () => {
   }, [queryParam])
 
 
-    if (isPending) {
-    return <div>Loading...</div>
-  }
 
   return (
     <div className="flex-1 mt-10 mx-3 lg:mx-8">

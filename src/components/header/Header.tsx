@@ -16,9 +16,9 @@ export const Header = () => {
     }) => state.auth
   );
   const navItems = [
-    { id: "problems", label: "Problems", icon: Code ,href:""},
-    { id: "leaderboard", label: "Leaderboard", icon: Trophy,href:"leaderboard" },
-    { id: "search", label: "Search", icon: Search, href:"search" },
+    { id: "problems", label: "Problems", icon: Code, href: "" },
+    { id: "leaderboard", label: "Leaderboard", icon: Trophy, href: "leaderboard" },
+    { id: "search", label: "Search", icon: Search, href: "search" },
   ];
 
   return (
@@ -38,29 +38,28 @@ export const Header = () => {
           </Link>
           {/* Navigation */}
           <nav className="hidden md:flex space-x-8">
-           {navItems.map(({ id, label, icon: Icon, href }) => (
-                  <NavLink
-                    key={id}
-                    to={`/${href}`}
-                    className={({ isActive }) =>
-                      `flex flex-col items-center py-2 px-4 text-xs font-medium 
+            {navItems.map(({ id, label, icon: Icon, href }) => (
+              <NavLink
+                key={id}
+                to={`/${href}`}
+                className={({ isActive }) =>
+                  `flex flex-col items-center py-2 px-4 text-xs font-medium 
          transition-all duration-300 ease-in-out
-         ${
-           isActive
-             ? "text-black bg-primary/50 rounded-xl dark:text-white font-semibold shadow-md"
-             : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
-         }`
-                    }
-                  >
-                    <Icon className="w-4 h-4 mb-1 transition-all duration-300" />
-                    <span className="transition-all duration-300">{label}</span>
-                  </NavLink>
-                ))}
+         ${isActive
+                    ? "text-black bg-primary/50 rounded-xl dark:text-white font-semibold shadow-md"
+                    : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
+                  }`
+                }
+              >
+                <Icon className="w-4 h-4 mb-1 transition-all duration-300" />
+                <span className="transition-all duration-300">{label}</span>
+              </NavLink>
+            ))}
           </nav>
 
           {/* User Section */}
           <div className="flex items-center space-x-4">
-            <Notificationcomp/>
+            <Notificationcomp />
 
             <ModeToggle />
             {isAuthenticated ? (
@@ -95,14 +94,22 @@ export const Header = () => {
       {/* Mobile Navigation */}
       <div className="md:hidden border-t border-gray-200 dark:border-gray-700 ">
         <div className="flex justify-around py-2">
-          {navItems.map(({ id, label, icon: Icon }) => (
-            <button
+          {navItems.map(({ id, label, icon: Icon, href }) => (
+            <NavLink
               key={id}
-              className="flex flex-col items-center py-2 px-4 text-xs font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+              to={`/${href}`}
+              className={({ isActive }) =>
+                `flex flex-col items-center py-2 px-4 text-xs font-medium 
+         transition-all duration-300 ease-in-out
+         ${isActive
+                  ? "text-black bg-primary/50 rounded-xl dark:text-white font-semibold shadow-md"
+                  : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
+                }`
+              }
             >
-              <Icon className="w-5 h-5 mb-1" />
-              {label}
-            </button>
+              <Icon className="w-4 h-4 mb-1 transition-all duration-300" />
+              <span className="transition-all duration-300">{label}</span>
+            </NavLink>
           ))}
         </div>
       </div>

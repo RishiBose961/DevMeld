@@ -8,6 +8,7 @@ import useAuthEffect from "./components/useAuthEffect";
 import SinglePost from "./pages/post/SinglePost";
 import Codesubmit from "./pages/code/Codesubmit";
 import SearchPage from "./pages/Search/SearchPage";
+import CommunityPage from "./pages/Community/CommunityPage";
 
 const App = () => {
   useAuthEffect();
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<div>Profile</div>} />
           <Route path="/p/:id" element={<SinglePost />} />
+          <Route path="/community/:id" element={<CommunityPage/>} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/code-solution/:id/post/:posted" element={<Codesubmit />} />
         </Route>

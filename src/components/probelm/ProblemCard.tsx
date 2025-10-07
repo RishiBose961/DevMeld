@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import UsePostHook from "../hook/postHook/UsePostHook";
 import TitleLink from "../Link/TitleLink";
 import { Badge } from "../ui/badge";
+import CompanyProfie from "../profie/CompanyProfie";
 
 
 interface Problem {
@@ -13,6 +14,7 @@ interface Problem {
   postedBy: {
     companyName: string;
     username: string;
+    _id: string;
   };
 }
 
@@ -22,12 +24,13 @@ const ProblemCard = () => {
     getDevRecom: Problem[];
   };
 
+
   if (isPending) return <div>Loading...</div>;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {getDevRecom.map((problem: Problem, index: number) => (
         <>
-          <div key={index} className="rounded-xl border border-gray-600 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+          <div key={index} className="rounded-xl bg-card border border-gray-600 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-300 cursor-pointer group">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <div>
@@ -35,7 +38,8 @@ const ProblemCard = () => {
 
                   <div className="flex items-center space-x-2 mt-1">
                     <Building2 className="w-4 h-4 " />
-                    <span className="text-sm ">{problem?.postedBy?.companyName}</span>
+                    <CompanyProfie value={problem.postedBy.companyName} id={problem.postedBy._id} />
+
                   </div>
                 </div>
               </div>
@@ -65,8 +69,8 @@ const ProblemCard = () => {
                 </div>
                 <div className="flex items-center space-x-1">
                   <User2 className="w-4 h-4" />
-                    <span>{problem?.postedBy?.username}</span>
-               
+                  <span>{problem?.postedBy?.username}</span>
+
                 </div>
               </div>
 

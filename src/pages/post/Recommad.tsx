@@ -1,4 +1,5 @@
 import UseRecommd from "@/components/hook/recommadationHook/UseRecommd";
+import CompanyProfie from "@/components/profie/CompanyProfie";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,7 @@ const Recommad = () => {
       postedBy?: {
         username?: string;
         companyName?: string;
+        _id?: string;
       };
       requiredtech?: string[];
       credits: number;
@@ -48,6 +50,7 @@ const Recommad = () => {
             postedBy?: {
               username?: string;
               companyName?: string;
+              _id?: string;
             };
             requiredtech?: string[];
             credits: number;
@@ -72,7 +75,8 @@ const Recommad = () => {
                     <span className="inline-flex items-center gap-1">
                       <Building2 className="size-4" aria-hidden />
                       <span className="sr-only">Company:</span>
-                      {item.postedBy.companyName}
+                      <CompanyProfie value={item.postedBy.companyName} id={item.postedBy._id ?? ""}  />
+                    
                     </span>
                   ) : null}
                   {item.postedBy?.username ? (
