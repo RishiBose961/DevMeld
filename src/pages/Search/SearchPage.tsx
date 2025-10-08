@@ -6,10 +6,13 @@ import { useState, useEffect } from "react"
 import { useLocation, useSearchParams } from "react-router"
 import SearchResult from "./SearchResult"
 import SearchHistory from "./SearchHistory"
+import { useQueryClient } from "@tanstack/react-query"
+import LoadingFace from "@/components/Loading/LoadingFace"
 
 const SearchPage = () => {
   const location = useLocation()
   const valueloc = location.pathname.split("/")[1]
+  const queryClient = useQueryClient();
 
   const [searchParams, setSearchParams] = useSearchParams()
   const queryParam = searchParams.get("q") || ""
@@ -34,12 +37,15 @@ const SearchPage = () => {
   // update input field only
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
+    
+      // queryClient.invalidateQueries({ queryKey: ["getAllpost"] });
   }
 
 
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
       setSearchParams({ q: searchQuery })
+     
     } else {
       setSearchParams({})
     }
@@ -50,10 +56,10 @@ const SearchPage = () => {
     setSearchParams({})
   }
 
-  useEffect(() => {
-    setSearchQuery(queryParam)
-  }, [queryParam])
-
+useEffect(() => {
+  setSearchQuery(queryParam)
+  queryClient.refetchQueries({ queryKey: ["getSearchHistorys"], exact: false })
+}, [queryParam, queryClient])
 
 
   return (
@@ -135,8 +141,12 @@ const SearchPage = () => {
           </div>
         </div>
       </div>
+{
+  isPending ? <LoadingFace value={6} gridvalue={3}/>: <SearchResult getSearch={getSearch} /> 
+}
+      
 
-      <SearchResult getSearch={getSearch} />
+     
 
       <SearchHistory/>
     </div>

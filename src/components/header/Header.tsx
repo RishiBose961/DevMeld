@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router";
 import { ModeToggle } from "../mode-toggle";
 import Notificationcomp from "../notification/Notificationcomp";
 import { Button } from "../ui/button";
+import useCreditHook from "../hook/creditHook/useCreditHook";
 
 export const Header = () => {
   const { isAuthenticated, user } = useSelector(
@@ -15,11 +16,18 @@ export const Header = () => {
       };
     }) => state.auth
   );
-  const navItems = [
-    { id: "problems", label: "Problems", icon: Code, href: "" },
-    { id: "leaderboard", label: "Leaderboard", icon: Trophy, href: "leaderboard" },
-    { id: "search", label: "Search", icon: Search, href: "search" },
-  ];
+
+  const { isPending, getCredit } = useCreditHook() as {
+    isPending: boolean;
+    getCredit: { credits: number };
+  };
+const navItems = [
+  { id: "problems", label: "Problems", icon: Code, href: "" },
+  { id: "leaderboard", label: "Leaderboard", icon: Trophy, href: "leaderboard" },
+  ...(isAuthenticated
+    ? [{ id: "search", label: "Search", icon: Search, href: "search" }]
+    : []),
+]
 
   return (
     <header className="border-b bg-white rounded-b-2xl dark:bg-gray-900 z-10  border-gray-200 dark:border-gray-700 sticky top-0">
@@ -69,7 +77,7 @@ export const Header = () => {
                     {user?.username}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    234 credits
+                    {isPending ? "Loading..." : `${getCredit?.credits} credits`} 
                   </p>
                 </div>
                 <img

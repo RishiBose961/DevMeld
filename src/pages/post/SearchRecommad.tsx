@@ -1,4 +1,5 @@
 import UseSearchRecommd from "@/components/hook/recommadationHook/UseSearchRecommd";
+import LoadingFace from "@/components/Loading/LoadingFace";
 import CompanyProfie from "@/components/profie/CompanyProfie";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,10 +31,11 @@ const SearchRecommad = () => {
     }>;
   }
 
-  if (isPending) {
-    return <div>Loading...</div>
+    if (isPending) {
+    return <>
+      <LoadingFace value={4} gridvalue={4}/>
+    </>;
   }
-
   return (
     <div> {
       getSearchRecommd?.length > 0 &&  <p className="text-xl font-bold">You might be interested in</p>} 

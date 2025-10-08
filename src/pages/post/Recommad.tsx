@@ -1,4 +1,5 @@
 import UseRecommd from "@/components/hook/recommadationHook/UseRecommd";
+import LoadingFace from "@/components/Loading/LoadingFace";
 import CompanyProfie from "@/components/profie/CompanyProfie";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,11 +34,13 @@ const Recommad = () => {
   };
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <>
+      <LoadingFace value={4} gridvalue={4} />
+    </>;
   }
 
 
- 
+
   return (
     <>
       <p className="text-xl font-bold">Recommendation</p>
@@ -75,8 +78,8 @@ const Recommad = () => {
                     <span className="inline-flex items-center gap-1">
                       <Building2 className="size-4" aria-hidden />
                       <span className="sr-only">Company:</span>
-                      <CompanyProfie value={item.postedBy.companyName} id={item.postedBy._id ?? ""}  />
-                    
+                      <CompanyProfie value={item.postedBy.companyName} id={item.postedBy._id ?? ""} />
+
                     </span>
                   ) : null}
                   {item.postedBy?.username ? (
@@ -117,7 +120,7 @@ const Recommad = () => {
                     <span className="sr-only">Credits:</span>
                     <span className="font-medium">{item.credits}</span>
                   </div>
-                  
+
 
                   <Link to={`/p/${item._id}`} >
                     <Button className="cursor-pointer">

@@ -4,6 +4,7 @@ import UsePostHook from "../hook/postHook/UsePostHook";
 import TitleLink from "../Link/TitleLink";
 import { Badge } from "../ui/badge";
 import CompanyProfie from "../profie/CompanyProfie";
+import LoadingFace from "../Loading/LoadingFace";
 
 
 interface Problem {
@@ -25,7 +26,11 @@ const ProblemCard = () => {
   };
 
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) {
+    return <>
+      <LoadingFace value={6} gridvalue={3} />
+    </>;
+  }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {getDevRecom.map((problem: Problem, index: number) => (
