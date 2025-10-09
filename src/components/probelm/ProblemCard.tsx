@@ -72,11 +72,14 @@ const ProblemCard = () => {
                   <Clock className="w-4 h-4" />
                   <span>12</span>
                 </div>
-                <div className="flex items-center space-x-1">
+                <Link to={`/startup/${problem?.postedBy?.username}`}>
+                 <div className="flex items-center space-x-1 cursor-pointer">
                   <User2 className="w-4 h-4" />
                   <span>{problem?.postedBy?.username}</span>
 
                 </div>
+                </Link>
+               
               </div>
 
             </div>

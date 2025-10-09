@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Building2, Coins, Eye, User } from "lucide-react";
+import { Building2, Coins, Eye, User2 } from "lucide-react";
 import { Link } from "react-router";
 
 const Recommad = () => {
@@ -83,11 +83,18 @@ const Recommad = () => {
                     </span>
                   ) : null}
                   {item.postedBy?.username ? (
-                    <span className="inline-flex items-center gap-1">
-                      <User className="size-4" aria-hidden />
-                      <span className="sr-only">Posted by:</span>
-                      {item.postedBy.username}
-                    </span>
+                      <Link to={`/startup/${item?.postedBy?.username}`}>
+                 <div className="flex items-center space-x-1 cursor-pointer">
+                  <User2 className="w-4 h-4" />
+                  <span>{item?.postedBy?.username}</span>
+
+                </div>
+                </Link>
+                    // <span className="inline-flex items-center gap-1">
+                    //   <User className="size-4" aria-hidden />
+                    //   <span className="sr-only">Posted by:</span>
+                    //   {item.postedBy.username}
+                    // </span>
                   ) : null}
                 </div>
               </CardHeader>

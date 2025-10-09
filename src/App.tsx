@@ -11,6 +11,7 @@ import SearchPage from "./pages/Search/SearchPage";
 import CommunityPage from "./pages/Community/CommunityPage";
 import LeaderBoard from "./pages/LeaderBoard/LeaderBoard";
 import UserProfile from "./pages/Profile/UserProfile";
+import UserStartupProfile from "./pages/Profile/UserStartupProfile";
 
 const App = () => {
   useAuthEffect();
@@ -25,7 +26,8 @@ const App = () => {
         <Route path="/signin" element={<Login />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
         <Route path="/*" element={<div>404</div>} />
-        <Route path="/p/:id" element={<UserProfile />} />
+        <Route path="/dev/:id" element={<UserProfile />} />
+        <Route path="/startup/:id" element={<UserStartupProfile />} />
 
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<div>Profile</div>} />

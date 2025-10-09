@@ -7,7 +7,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import useOnlineStore from "@/ZustandStore/useOnlineStore";
-import { Users } from "lucide-react";
+import { Radio, Users } from "lucide-react";
 
 const OnlineUser = () => {
     const users = useOnlineStore((state) => state.users);
@@ -16,8 +16,9 @@ const OnlineUser = () => {
         <Sheet>
             {/* Trigger button */}
             <SheetTrigger>
-                <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200">
-                    <Users />
+                <div className="flex items-center gap-1 h-12 px-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                    <Radio className="size-5 text-red-500" />
+                    <span className="font-medium text-sm">({users.length})</span>
                 </div>
             </SheetTrigger>
 

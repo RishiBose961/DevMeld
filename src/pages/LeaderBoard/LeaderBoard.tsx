@@ -64,7 +64,7 @@ const LeaderBoard = () => {
 
                             <TableCell>{data.credits}</TableCell>
                             <TableCell className="text-center space-x-2">
-                                <Link to={`/p/${data.username}`}><Button><User /></Button></Link>
+                                <Link to={`/dev/${data.username}`}><Button><User /></Button></Link>
                                 <Button onClick={handleCopyEmail.bind(null, data.emailAddress)}><Mail /></Button>
                             </TableCell>
                         </TableRow>

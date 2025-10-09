@@ -5,6 +5,7 @@ import { ModeToggle } from "../mode-toggle";
 import Notificationcomp from "../notification/Notificationcomp";
 import { Button } from "../ui/button";
 import useCreditHook from "../hook/creditHook/useCreditHook";
+import Avatars from "../Avatar/Avatars";
 
 export const Header = () => {
   const { isAuthenticated, user } = useSelector(
@@ -21,13 +22,13 @@ export const Header = () => {
     isPending: boolean;
     getCredit: { credits: number };
   };
-const navItems = [
-  { id: "problems", label: "Problems", icon: Code, href: "" },
-  { id: "leaderboard", label: "Leaderboard", icon: Trophy, href: "leaderboard" },
-  ...(isAuthenticated
-    ? [{ id: "search", label: "Search", icon: Search, href: "search" }]
-    : []),
-]
+  const navItems = [
+    { id: "problems", label: "Problems", icon: Code, href: "" },
+    { id: "leaderboard", label: "Leaderboard", icon: Trophy, href: "leaderboard" },
+    ...(isAuthenticated
+      ? [{ id: "search", label: "Search", icon: Search, href: "search" }]
+      : []),
+  ]
 
   return (
     <header className="border-b bg-white rounded-b-2xl dark:bg-gray-900 z-10  border-gray-200 dark:border-gray-700 sticky top-0">
@@ -77,14 +78,10 @@ const navItems = [
                     {user?.username}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {isPending ? "Loading..." : `${getCredit?.credits} credits`} 
+                    {isPending ? "Loading..." : `${getCredit?.credits} credits`}
                   </p>
                 </div>
-                <img
-                  src="https://via.placeholder.com/32"
-                  alt="User Avatar"
-                  className="w-8 h-8 rounded-full border-2 border-gray-200 dark:border-gray-700"
-                />
+                <Avatars />
               </div>
             ) : (
               <div className="flex items-center space-x-3">

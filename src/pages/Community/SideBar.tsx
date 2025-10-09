@@ -1,3 +1,4 @@
+import Avatars from "@/components/Avatar/Avatars";
 import UseCommunityUser from "@/components/hook/communityHook/UseCommunityUser";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -28,6 +29,7 @@ const Sidebar = ({ id }: SidebarProps) => {
 
   if (isPending) return <div>Loading...</div>;
 
+
   return (
     <div className="m-3 sm:p-4 backdrop-blur-md rounded-xl bg-card/40 border-t border-border/30">
       <div className="flex flex-col justify-between rounded-2xl">
@@ -36,7 +38,9 @@ const Sidebar = ({ id }: SidebarProps) => {
             <div className="h-12 w-32 col-span-2 flex items-center justify-center rounded-lg bg-gray-100 text-xs text-gray-600">
               Community
             </div>
-            <OnlineUser />
+            {communityId ? <OnlineUser /> : <div className="flex justify-center items-center">
+              <Avatars />
+            </div>}
           </div>
 
 
@@ -49,8 +53,8 @@ const Sidebar = ({ id }: SidebarProps) => {
                     onClick={() => setCommunityId(item._id)}
                     variant="ghost"
                     className={`w-full justify-start mb-3 ${isSelected
-                        ? "bg-blue-500 text-white hover:bg-blue-600"
-                        : "hover:bg-gray-100 bg-card "
+                      ? "bg-blue-500 text-white hover:bg-blue-600"
+                      : "hover:bg-gray-100 bg-card "
                       }`}
                   >
                     <p
