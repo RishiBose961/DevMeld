@@ -24,6 +24,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
+import SwipeToVerify from "./SwipeToVerify";
 
 type ExperienceLevel = "Beginner" | "Intermediate" | "Advanced" | "Expert";
 
@@ -49,6 +50,7 @@ export default function Register() {
 
   const [skills, setSkills] = useState<string[]>([]);
   const [currentSkill, setCurrentSkill] = useState("");
+  const [showSwipeToVerify, setShowSwipeToVerify] = useState(false);
   const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel | "">(
     ""
   );
@@ -108,6 +110,11 @@ export default function Register() {
       e.preventDefault();
       addSkill();
     }
+  };
+
+  const handleVerify = () => {
+    //console.log("✅ User Verified!");
+    setShowSwipeToVerify(true);
   };
 
   return (
@@ -248,13 +255,25 @@ export default function Register() {
               </p>
             </div>
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={mutation.isPending}
-            >
-              {mutation.isPending ? "Creating..." : "Create Account"}
-            </Button>
+
+            {
+              showSwipeToVerify ?
+                <>
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={mutation.isPending}
+                  >
+                    {mutation.isPending ? "Creating..." : "Create Account"}
+                  </Button>
+                </> :
+
+                <SwipeToVerify onVerified={handleVerify} />
+            }
+
+
+
+
           </form>
           <div className="text-center mt-4">
             <p className="text-sm">
@@ -268,6 +287,6 @@ export default function Register() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </div >
   );
 }

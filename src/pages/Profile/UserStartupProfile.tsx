@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AvatarImage } from "@radix-ui/react-avatar"
-import { HeartHandshake, QrCode } from "lucide-react"
+import { QrCode } from "lucide-react"
 import { useParams } from "react-router"
 
 
@@ -41,7 +41,7 @@ const UserStartupProfile = () => {
 
     if (isPending) {
         return <div>Loading...</div>
-        
+
     }
 
     return (
@@ -91,10 +91,8 @@ const UserStartupProfile = () => {
                 </CardContent>
             </Card>
             <div className="mt-4 w-fit space-x-3 bg-card p-2 rounded-3xl">
-                <Button>
-                    <HeartHandshake />Follow</Button>
-                <Button>
-                    <QrCode />QR Code</Button>
+
+                <Button><QrCode />QR Code</Button>
 
             </div>
         </div>

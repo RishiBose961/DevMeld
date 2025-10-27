@@ -18,7 +18,8 @@ import { Lock, Mail } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import SwipeToVerify from "./SwipeToVerify";
 
 interface IFormInputLogin {
   emailAddress: string;
@@ -39,6 +40,8 @@ export default function Login() {
     (state: { auth: { isAuthenticated: boolean; isLoading: boolean } }) =>
       state.auth
   );
+
+  const [showSwipeToVerify, setShowSwipeToVerify] = useState(false);
 
   // Redirect if already logged in
   useEffect(() => {
@@ -75,6 +78,11 @@ export default function Login() {
   if (isLoading) {
     return <div className="text-center p-4">Loading...</div>;
   }
+
+  const handleVerify = () => {
+    //console.log("✅ User Verified!");
+    setShowSwipeToVerify(true);
+  };
 
   return (
     <div className="mt-5  flex items-center justify-center p-4">
@@ -146,7 +154,10 @@ export default function Login() {
               )}
             </div>
 
-            {/* Submit Button */}
+            {
+              showSwipeToVerify ? 
+                <>
+              {/* Submit Button */}
             <Button
               type="submit"
               className="w-full"
@@ -154,6 +165,12 @@ export default function Login() {
             >
               {mutation.isPending ? "Loading..." : "Sign In"}
             </Button>
+            </>:
+
+               <SwipeToVerify onVerified={handleVerify} />
+            }
+
+            
           </form>
 
           {/* Sign Up Link */}

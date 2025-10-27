@@ -10,12 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Building2, Coins, Eye, User } from "lucide-react";
+import { Building2, Eye, HandCoins, HandHeart, User2 } from "lucide-react";
 import { Link } from "react-router";
 const SearchRecommad = () => {
   const { isPending, getSearchRecommd } = UseSearchRecommd() as {
     isPending: boolean;
-    getSearchRecommd:Array<{
+    getSearchRecommd: Array<{
       _id: string;
       title: string;
       description: string;
@@ -25,20 +25,21 @@ const SearchRecommad = () => {
       };
       requiredtech?: string[];
       credits: number;
+      pay: number;
       noofparticipants?: number;
       createdAt?: string;
       duration?: string;
     }>;
   }
 
-    if (isPending) {
+  if (isPending) {
     return <>
-      <LoadingFace value={4} gridvalue={4}/>
+      <LoadingFace value={4} gridvalue={4} />
     </>;
   }
   return (
     <div> {
-      getSearchRecommd?.length > 0 &&  <p className="text-xl font-bold">You might be interested in</p>} 
+      getSearchRecommd?.length > 0 && <p className="text-xl font-bold">You might be interested in</p>}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-3 mb-5">
         {Array.isArray(getSearchRecommd) && getSearchRecommd.map(
           (item: {
@@ -52,6 +53,7 @@ const SearchRecommad = () => {
             };
             requiredtech?: string[];
             credits: number;
+            pay: number;
             noofparticipants?: number;
             createdAt?: string;
           }) => (
@@ -73,16 +75,18 @@ const SearchRecommad = () => {
                     <span className="inline-flex items-center gap-1">
                       <Building2 className="size-4" aria-hidden />
                       <span className="sr-only">Company:</span>
-                      <CompanyProfie value={item.postedBy.companyName}  id={item.postedBy._id ?? ""} />  
-                    
+                      <CompanyProfie value={item.postedBy.companyName} id={item.postedBy._id ?? ""} />
+
                     </span>
                   ) : null}
                   {item.postedBy?.username ? (
-                    <span className="inline-flex items-center gap-1">
-                      <User className="size-4" aria-hidden />
-                      <span className="sr-only">Posted by:</span>
-                      {item.postedBy.username}
-                    </span>
+                    <Link to={`/startup/${item?.postedBy?.username}`}>
+                      <div className="flex items-center space-x-1 cursor-pointer">
+                        <User2 className="w-4 h-4" />
+                        <span>{item?.postedBy?.username}</span>
+
+                      </div>
+                    </Link>
                   ) : null}
                 </div>
               </CardHeader>
@@ -110,10 +114,15 @@ const SearchRecommad = () => {
                 ) : null}
 
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Coins className="size-4 text-amber-500" aria-hidden />
+                    <div className="flex items-center space-x-1">
+                    <HandCoins className="size-5 text-amber-500" aria-hidden />
+                    <span className="sr-only">Select Join Using Points</span>
+                    <span className="font-medium">{item.pay ?? 0}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <HandHeart className="size-5 text-amber-500" aria-hidden />
                     <span className="sr-only">Credits:</span>
-                    <span className="font-medium">{item.credits}</span>
+                    <span className="font-medium">{item.credits ?? 0}</span>
                   </div>
 
 

@@ -79,11 +79,14 @@ const SearchResult = ({ getSearch }: SearchResultProps) => {
               )}
 
               <h2 className="text-lg font-bold">{item.fullName}</h2>
-              <p className="text-sm">{item.username}</p>
+              <p className="text-sm">{item?.username}</p>
               <div className="space-x-3 pt-2">
-                <Button>
+                <Link to={`/dev/${item?.username}`}>
+                 <Button>
                   <User />
                 </Button>
+                </Link>
+               
                 <Button>
                   <HeartHandshake />
                 </Button>

@@ -3,11 +3,30 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { HeartHandshake, QrCode } from "lucide-react"
-import { useParams } from "react-router"
+import { logoutUserAction } from "@/slice/authSlice"
+import { LogOut, Medal, QrCode } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useParams } from "react-router"
+import TimeLineDev from "../TimeLine/TimeLineDev"
 
 const UserProfile = () => {
   const { id } = useParams()
+
+  const { user } = useSelector(
+    (state: {
+      auth: {
+        isAuthenticated: boolean;
+        user: { token: string; _id: string; username: string };
+      };
+    }) => state.auth
+  );
+
+  const dispatch = useDispatch();
+
+
+  const handleLogout = () => {
+    dispatch(logoutUserAction());
+  };
 
 
   const { isPending, getProfileDev } = useProfileDevHook({ username: id as string }) as {
@@ -112,12 +131,46 @@ const UserProfile = () => {
         </CardContent>
       </Card>
       <div className="mt-4 w-fit space-x-3 bg-card p-2 rounded-3xl">
-        <Button>
-          <HeartHandshake />Follow</Button>
-        <Button>
-          <QrCode />QR Code</Button>
-       
+        {/* {isAuthenticated && user?._id !== getProfileDev?._id && (
+          <Button>
+            <HeartHandshake />
+            Follow
+          </Button>
+        )} */}
+
+
+        <Button variant="secondary" className=" cursor-pointer">
+          <QrCode />QR Code
+        </Button>
+        {/* {
+          user?._id === getProfileDev?._id && (
+            <CreatePlayground/>
+         
+          )
+        } */}
+
+        <Link to={`/achievements`}>
+          <Button className=" cursor-pointer">
+            <Medal /> Achievements
+          </Button>
+        </Link>
+
+        {
+          user?._id === getProfileDev?._id && (
+            <Button onClick={handleLogout} variant="destructive" className=" cursor-pointer">
+              <LogOut />Logout
+            </Button>
+          )
+        }
+
+
+
+
+
+
       </div>
+
+      <TimeLineDev id={getProfileDev?._id} />
     </div>
   )
 }

@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Building2, Coins, Eye, User2 } from "lucide-react";
+import { Building2, Eye, HandCoins, HandHeart, User2 } from "lucide-react";
 import { Link } from "react-router";
 
 const Recommad = () => {
@@ -27,6 +27,7 @@ const Recommad = () => {
       };
       requiredtech?: string[];
       credits: number;
+      pay: number;
       noofparticipants?: number;
       createdAt?: string;
       duration?: string;
@@ -57,6 +58,7 @@ const Recommad = () => {
             };
             requiredtech?: string[];
             credits: number;
+            pay?: number;
             noofparticipants?: number;
             createdAt?: string;
           }) => (
@@ -83,13 +85,13 @@ const Recommad = () => {
                     </span>
                   ) : null}
                   {item.postedBy?.username ? (
-                      <Link to={`/startup/${item?.postedBy?.username}`}>
-                 <div className="flex items-center space-x-1 cursor-pointer">
-                  <User2 className="w-4 h-4" />
-                  <span>{item?.postedBy?.username}</span>
+                    <Link to={`/startup/${item?.postedBy?.username}`}>
+                      <div className="flex items-center space-x-1 cursor-pointer">
+                        <User2 className="w-4 h-4" />
+                        <span>{item?.postedBy?.username}</span>
 
-                </div>
-                </Link>
+                      </div>
+                    </Link>
                     // <span className="inline-flex items-center gap-1">
                     //   <User className="size-4" aria-hidden />
                     //   <span className="sr-only">Posted by:</span>
@@ -122,11 +124,19 @@ const Recommad = () => {
                 ) : null}
 
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Coins className="size-4 text-amber-500" aria-hidden />
-                    <span className="sr-only">Credits:</span>
-                    <span className="font-medium">{item.credits}</span>
+
+                  <div className="flex items-center space-x-1">
+                    <HandCoins className="size-5 text-amber-500" aria-hidden />
+                    <span className="sr-only">Select Join Using Points</span>
+                    <span className="font-medium">{item.pay ?? 0}</span>
                   </div>
+                  <div className="flex items-center space-x-1">
+                    <HandHeart className="size-5 text-amber-500" aria-hidden />
+                    <span className="sr-only">Credits:</span>
+                    <span className="font-medium">{item.credits ?? 0}</span>
+                  </div>
+
+
 
 
                   <Link to={`/p/${item._id}`} >

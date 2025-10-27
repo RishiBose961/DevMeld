@@ -37,9 +37,7 @@ export const Header = () => {
           {/* Logo */}
           <Link to="/">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Code className="w-5 h-5 text-white" />
-              </div>
+        <img src="/logo.png" alt="Logo" className="size-10" />
               <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                 DevMeld
               </h1>
@@ -78,7 +76,7 @@ export const Header = () => {
                     {user?.username}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {isPending ? "Loading..." : `${getCredit?.credits} credits`}
+                    {isPending ? "Loading..." : `${getCredit?.credits === undefined ? 0 : getCredit?.credits} Score`}
                   </p>
                 </div>
                 <Avatars />

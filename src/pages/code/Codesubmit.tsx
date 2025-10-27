@@ -61,7 +61,7 @@ const Codesubmit = () => {
   return (
     <div className="pt-6 mb-5">
       <div className="mb-6">
-        <label className="block text-sm font-medium text-white mb-2">
+        <label className="block text-sm font-medium mb-2">
           Select Language
         </label>
         <select

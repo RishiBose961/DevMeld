@@ -8,7 +8,7 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
-import { HeartHandshake, Users } from "lucide-react"
+import { Users } from "lucide-react"
 import { Button } from "../ui/button"
 const CompanyProfie = ({ value, id }: { value: string, id: string }) => {
     return (
@@ -22,14 +22,14 @@ const CompanyProfie = ({ value, id }: { value: string, id: string }) => {
                 </DrawerHeader>
                 <DrawerFooter >
                     <div className="pb-3 space-x-3">
-                        <Button className=" cursor-pointer"><HeartHandshake />Follow</Button>
+                        
                         <a href={`/community/${id}`}>
                             <Button className="cursor-pointer" variant="outline">
                                 <Users /> Community
                             </Button>
                         </a>
 
-                        <DrawerClose>
+                        <DrawerClose className=" cursor-pointer">
 
                             Cancel
                         </DrawerClose>

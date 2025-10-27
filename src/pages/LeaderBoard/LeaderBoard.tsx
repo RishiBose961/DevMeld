@@ -36,7 +36,10 @@ const LeaderBoard = () => {
     }
 
     return (
-        <div className="bg-card mt-3 rounded-xl p-2"><Table>
+        <>
+        <p className="text-2xl font-bold mt-2">Leaderboard</p>
+        <div className="bg-card mt-3 rounded-xl p-2">
+            <Table>
             <TableCaption>Rank Leaderboard</TableCaption>
             <TableHeader>
                 <TableRow>
@@ -70,18 +73,11 @@ const LeaderBoard = () => {
                         </TableRow>
                     ))
                 }
-                {/* <TableRow>
-                    <TableCell className="font-medium">INV001</TableCell>
-                    <TableCell>Paid</TableCell>
-
-                    <TableCell>$250.00</TableCell>
-                    <TableCell className="text-center space-x-2">
-                        <Button><User /></Button>
-                        <Button><Mail /></Button>
-                    </TableCell>
-                </TableRow> */}
+               
             </TableBody>
         </Table></div>
+        </>
+        
     )
 }
 
