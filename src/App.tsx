@@ -15,6 +15,7 @@ import UserStartupProfile from "./pages/Profile/UserStartupProfile";
 import SearchPage from "./pages/Search/SearchPage";
 import ViewSolution from "./pages/Solution/ViewSolution";
 import PlayGround from "./pages/PlayGround/PlayGround";
+import PlayGoundRoom from "./pages/PlayGround/PlayGoundRoom";
 
 const App = () => {
   useAuthEffect();
@@ -38,7 +39,8 @@ const App = () => {
           <Route path="/community/:id" element={<CommunityPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/code-solution/:id/post/:posted" element={<Codesubmit />} />
-          <Route path="/playground/:id" element={<PlayGround />} />
+          <Route path="/playground" element={<PlayGround postId={""} />} />
+          <Route path="/playground/:roomName" element={<PlayGoundRoom />} />
           <Route path="/solution/:id" element={<ViewSolution />} />
         </Route>
       </Routes>

@@ -11,6 +11,7 @@ import MySolution from "../Solution/MySolution";
 import JoinPay from "@/components/Secure/JoinPay";
 import { CreatePlayground } from "../PlayGround/CreatePlayground";
 import { useEffect, useState } from "react";
+import PlayGround from "../PlayGround/PlayGround";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -196,7 +197,7 @@ const SinglePost = () => {
 
         <TabsContent value="playground">
           <CreatePlayground postId={getSingleData._id} />
-          <p>Playground</p>
+          <PlayGround postId={getSingleData._id}/>
         </TabsContent>
       </Tabs>
     </div>
