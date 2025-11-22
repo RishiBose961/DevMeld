@@ -40,7 +40,7 @@ const App = () => {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/code-solution/:id/post/:posted" element={<Codesubmit />} />
           <Route path="/playground" element={<PlayGround postId={""} />} />
-          <Route path="/playground/:roomName" element={<PlayGoundRoom />} />
+          <Route path="/playground/:roomName/:postId" element={<PlayGoundRoom />} />
           <Route path="/solution/:id" element={<ViewSolution />} />
         </Route>
       </Routes>

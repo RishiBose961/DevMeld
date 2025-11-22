@@ -8,6 +8,7 @@ import { LogOut, Medal, QrCode } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router"
 import TimeLineDev from "../TimeLine/TimeLineDev"
+import EditorTheme from "@/components/hook/editorTheme/EditorTheme"
 
 const UserProfile = () => {
   const { id } = useParams()
@@ -44,6 +45,10 @@ const UserProfile = () => {
       emailAddress?: string;
     };
   }
+
+  const { theme,
+    handleThemeChange,
+    themes } = EditorTheme();
 
 
 
@@ -154,6 +159,28 @@ const UserProfile = () => {
             <Medal /> Achievements
           </Button>
         </Link>
+
+        <select
+          value={theme}
+          onChange={handleThemeChange}
+          className="
+    w-40 p-2 rounded-md border 
+    bg-white text-gray-900 
+    dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
+    focus:outline-none focus:ring-2 focus:ring-blue-500
+  "
+        >
+          {themes.map((t) => (
+            <option
+              key={t}
+              value={t}
+              className="dark:bg-gray-800 dark:text-gray-100"
+            >
+              {t}
+            </option>
+          ))}
+        </select>
+
 
         {
           user?._id === getProfileDev?._id && (

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import EditorTheme from "@/components/hook/editorTheme/EditorTheme";
 import RightSideBar from "@/components/PlayGroundComp/RightSideBar";
 import { Editor, type OnChange, type OnMount } from "@monaco-editor/react";
 import axios from "axios";
@@ -30,7 +31,8 @@ interface RoomState {
 }
 
 const PlayGoundRoom = () => {
-  const { roomName } = useParams<{ roomName: string }>();
+  const { roomName } = useParams<{ roomName: string, postId: string }>();
+  
   const navigate = useNavigate();
 
   const { user } = useSelector((state: RootState) => state.auth);
@@ -46,6 +48,8 @@ const PlayGoundRoom = () => {
   const typingTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const REALTIME_SERVER = "http://localhost:5001";
+
+  const {theme} = EditorTheme();
 
   useEffect(() => {
     const socketIo: Socket = io(REALTIME_SERVER);
@@ -174,7 +178,7 @@ const PlayGoundRoom = () => {
   };
 
   return (
-    <div className="grid lg:grid-cols-4 gap-2 mt-2">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
       <div className="bg-card lg:h-[calc(100vh-80px)] rounded-xl">
         <RightSideBar
           isConnected={isConnected}
@@ -186,14 +190,14 @@ const PlayGoundRoom = () => {
           language={language}
         />
       </div>
-      <div className="col-span-3 rounded-xl lg:h-[calc(100vh-80px)]">
+      <div className="lg:col-span-3 rounded-xl lg:h-[calc(100vh-80px)]">
         <Editor
           height="100%"
           language={language}
           value={code}
           onChange={handleEditorChange}
           onMount={handleEditorDidMount}
-          theme="vs-dark"
+          theme={theme}
           options={{
             minimap: { enabled: true },
             fontSize: 20,

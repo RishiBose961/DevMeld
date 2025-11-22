@@ -1,11 +1,10 @@
 import { Code, Search, Trophy } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router";
-import { ModeToggle } from "../mode-toggle";
-import Notificationcomp from "../notification/Notificationcomp";
-import { Button } from "../ui/button";
-import useCreditHook from "../hook/creditHook/useCreditHook";
 import Avatars from "../Avatar/Avatars";
+import useCreditHook from "../hook/creditHook/useCreditHook";
+import { ModeToggle } from "../mode-toggle";
+import { Button } from "../ui/button";
 
 export const Header = () => {
   const { isAuthenticated, user } = useSelector(
@@ -66,7 +65,7 @@ export const Header = () => {
 
           {/* User Section */}
           <div className="flex items-center space-x-4">
-            <Notificationcomp />
+            {/* <Notificationcomp /> */}
 
             <ModeToggle />
             {isAuthenticated ? (

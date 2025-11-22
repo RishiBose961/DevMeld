@@ -6,6 +6,7 @@ import { createSubmissionSerivice } from "@/services/submissionapi";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import UseSubmited from "@/components/hook/validhook/UseSubmited";
+import EditorTheme from "@/components/hook/editorTheme/EditorTheme";
 
 const Codesubmit = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const Codesubmit = () => {
     getValidSubmit: any;
   };
 
+  const {theme} = EditorTheme();
   
   const [language, setLanguage] = useState("java");
   const [code, setCode] = useState(boilerplates["java"]);
@@ -87,7 +89,7 @@ const Codesubmit = () => {
           <Editor
             height="50vh"
             language={language}
-            theme="hc-black"
+            theme={theme}
             value={code}
             onChange={(value) => setCode(value ?? "")}
           />

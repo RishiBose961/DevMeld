@@ -17,7 +17,7 @@ const PlayGround = ({ postId }: { postId: string }) => {
   }
 
   const joinRoom = (roomName: string) => {
-    navigate(`/playground/${roomName}`);
+    navigate(`/playground/${roomName}/${postId}`);
   };
 
   return (

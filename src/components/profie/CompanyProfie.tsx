@@ -8,38 +8,45 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Users } from "lucide-react"
+import { Code, MessageSquareText } from "lucide-react"
+import { Link } from "react-router"
 import { Button } from "../ui/button"
-const CompanyProfie = ({ value, id }: { value: string, id: string }) => {
-    return (
-        <Drawer >
-            <DrawerTrigger className=" cursor-pointer">{value}</DrawerTrigger>
+const CompanyProfie = ({ value, id, postid }: { value: string, id: string, postid: string }) => {
 
-            <DrawerContent className=" max-w-6xl mx-auto w-96" >
-                <DrawerHeader>
-                    <DrawerTitle className="text-left">{value}</DrawerTitle>
-                    <DrawerDescription className="text-left">This action cannot be undone.</DrawerDescription>
+    return (
+        <Drawer>
+            <DrawerTrigger className="cursor-pointer">{value}</DrawerTrigger>
+
+            <DrawerContent className="max-w-6xl mx-auto w-96">
+                <DrawerHeader className="text-left">
+                    <DrawerTitle>{value}</DrawerTitle>
+                    <DrawerDescription />
                 </DrawerHeader>
-                <DrawerFooter >
-                    <div className="pb-3 space-x-3">
-                        
+
+                <DrawerFooter>
+                    <div className="flex items-center gap-3">
                         <a href={`/community/${id}`}>
-                            <Button className="cursor-pointer" variant="outline">
-                                <Users /> Community
+                            <Button variant="outline">
+                                <MessageSquareText className="mr-2 h-4 w-4" />
+                                Community
                             </Button>
                         </a>
 
-                        <DrawerClose className=" cursor-pointer">
+                        <Link to={`/p/${postid}?tab=playground`}>
+                            <Button variant="outline">
+                                <Code className="mr-2 h-4 w-4" />
+                                Playground
+                            </Button>
+                        </Link>
 
-                            Cancel
+                        <DrawerClose asChild>
+                            <Button variant="ghost">Cancel</Button>
                         </DrawerClose>
                     </div>
-
-
                 </DrawerFooter>
             </DrawerContent>
-
         </Drawer>
+
     )
 }
 

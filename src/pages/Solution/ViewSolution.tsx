@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import Editor from '@monaco-editor/react';
 import { Badge } from "@/components/ui/badge";
 import NoFoundSol from "./NoFoundSol";
+import EditorTheme from "@/components/hook/editorTheme/EditorTheme";
 const ViewSolution = () => {
   const { id } = useParams();
 
@@ -18,7 +19,7 @@ const ViewSolution = () => {
       createdAt: string;
     }>;
   }
-
+ const { theme} = EditorTheme();
   return (
     <div>
       <h1 className="text-xl uppercase mx-3 mt-2">View Solution</h1>
@@ -44,7 +45,7 @@ const ViewSolution = () => {
 
                   </div>
 
-                  <Editor  theme="hc-black" height="50vh" className="p-4" defaultLanguage={solu.language} defaultValue={solu.code} />
+                  <Editor  theme={theme} height="50vh" className="p-4" defaultLanguage={solu.language} defaultValue={solu.code} />
                   <p className="px-4 pb-3">{solu.createdAt.split("T")[0]}</p>
                 </div>
               ))

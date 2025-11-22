@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="mt-4 mb-3">
       {
-        isAuthenticated && <SearchRecommad/>
+        isAuthenticated && <SearchRecommad />
       }
       {
         isAuthenticated && <Recommad />
