@@ -1,14 +1,16 @@
+import EditorTheme from "@/components/hook/editorTheme/EditorTheme"
 import useProfileDevHook from "@/components/hook/profileHook/useProfileDevHook"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { logoutUserAction } from "@/slice/authSlice"
-import { LogOut, Medal, QrCode } from "lucide-react"
+import { LogOut, QrCode } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useParams } from "react-router"
+import { useParams } from "react-router"
+import { SkillsDialog } from "../Skill/SkillEdit"
 import TimeLineDev from "../TimeLine/TimeLineDev"
-import EditorTheme from "@/components/hook/editorTheme/EditorTheme"
+import { ReportCreate } from "./ReportCreate"
 
 const UserProfile = () => {
   const { id } = useParams()
@@ -135,7 +137,7 @@ const UserProfile = () => {
           </div>
         </CardContent>
       </Card>
-      <div className="mt-4 w-fit space-x-3 bg-card p-2 rounded-3xl">
+      <div className="mt-4 w-fit space-x-3 lg:flex bg-card p-2 rounded-3xl">
         {/* {isAuthenticated && user?._id !== getProfileDev?._id && (
           <Button>
             <HeartHandshake />
@@ -147,39 +149,49 @@ const UserProfile = () => {
         <Button variant="secondary" className=" cursor-pointer">
           <QrCode />QR Code
         </Button>
-        {/* {
+
+
+        {
           user?._id === getProfileDev?._id && (
-            <CreatePlayground/>
-         
+            <SkillsDialog />
           )
-        } */}
+        }
 
-        <Link to={`/achievements`}>
-          <Button className=" cursor-pointer">
-            <Medal /> Achievements
-          </Button>
-        </Link>
+        {
+          user?._id === getProfileDev?._id && (
+            <ReportCreate />
 
-        <select
-          value={theme}
-          onChange={handleThemeChange}
-          className="
-    w-40 p-2 rounded-md border 
+          )
+        }
+
+        {
+          user?._id === getProfileDev?._id && (
+            <>
+              <select
+                value={theme}
+                onChange={handleThemeChange}
+                className="
+    w-20 p-2 rounded-md border 
     bg-white text-gray-900 
     dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
     focus:outline-none focus:ring-2 focus:ring-blue-500
   "
-        >
-          {themes.map((t) => (
-            <option
-              key={t}
-              value={t}
-              className="dark:bg-gray-800 dark:text-gray-100"
-            >
-              {t}
-            </option>
-          ))}
-        </select>
+              >
+                {themes.map((t) => (
+                  <option
+                    key={t}
+                    value={t}
+                    className="dark:bg-gray-800 dark:text-gray-100"
+                  >
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </>
+
+          )
+        }
+
 
 
         {

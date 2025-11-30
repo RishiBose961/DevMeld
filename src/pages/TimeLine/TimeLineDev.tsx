@@ -25,7 +25,7 @@ const TimeLineDev = ({ id }: { id: string }) => {
             ) : getTimeLine?.length === 0 ? (
                 <div className="text-center text-gray-500 py-6">No activity found</div>
             ) : (
-                <ol className="relative border-s border-gray-200 dark:border-gray-700 pl-6">
+                <ol className="relative border-s border-white dark:border-gray-700 pl-6">
                     {getTimeLine.map((post, index) => (
                         <li key={index} className="mb-10 ms-2">
                             {/* Avatar on the timeline line */}

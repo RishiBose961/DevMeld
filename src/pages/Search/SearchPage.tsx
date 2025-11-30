@@ -1,13 +1,13 @@
 import UseSearchHook from "@/components/hook/searchhOOK/UseSearchHook"
+import LoadingFace from "@/components/Loading/LoadingFace"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ScanQrCode, Search, SearchIcon, X } from "lucide-react"
-import { useState, useEffect } from "react"
-import { useLocation, useSearchParams } from "react-router"
-import SearchResult from "./SearchResult"
-import SearchHistory from "./SearchHistory"
 import { useQueryClient } from "@tanstack/react-query"
-import LoadingFace from "@/components/Loading/LoadingFace"
+import { Search, SearchIcon, X } from "lucide-react"
+import { useEffect, useState } from "react"
+import { useLocation, useSearchParams } from "react-router"
+import SearchHistory from "./SearchHistory"
+import SearchResult from "./SearchResult"
 
 const SearchPage = () => {
   const location = useLocation()
@@ -37,15 +37,15 @@ const SearchPage = () => {
   // update input field only
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
-    
-      // queryClient.invalidateQueries({ queryKey: ["getAllpost"] });
+
+    // queryClient.invalidateQueries({ queryKey: ["getAllpost"] });
   }
 
 
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
       setSearchParams({ q: searchQuery })
-     
+
     } else {
       setSearchParams({})
     }
@@ -56,10 +56,10 @@ const SearchPage = () => {
     setSearchParams({})
   }
 
-useEffect(() => {
-  setSearchQuery(queryParam)
-  queryClient.refetchQueries({ queryKey: ["getSearchHistorys"], exact: false })
-}, [queryParam, queryClient])
+  useEffect(() => {
+    setSearchQuery(queryParam)
+    queryClient.refetchQueries({ queryKey: ["getSearchHistorys"], exact: false })
+  }, [queryParam, queryClient])
 
 
   return (
@@ -72,22 +72,19 @@ useEffect(() => {
       </div>
 
       <div
-        className={`relative transition-all duration-300 ${
-          isFocused ? "transform scale-105" : ""
-        }`}
+        className={`relative transition-all duration-300 ${isFocused ? "transform scale-105" : ""
+          }`}
       >
         <div
-          className={`relative bg-white dark:bg-gray-800 rounded-full border-2 transition-all duration-300 shadow-lg hover:shadow-xl ${
-            isFocused
+          className={`relative bg-white dark:bg-gray-800 rounded-full border-2 transition-all duration-300 shadow-lg hover:shadow-xl ${isFocused
               ? "border-blue-500 shadow-2xl ring-4 ring-blue-100 dark:ring-blue-900/30"
               : "border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500"
-          }`}
+            }`}
         >
           {/* Left search icon */}
           <Search
-            className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 transition-colors duration-300 ${
-              isFocused ? "text-blue-500" : "text-gray-400"
-            }`}
+            className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 transition-colors duration-300 ${isFocused ? "text-blue-500" : "text-gray-400"
+              }`}
           />
 
           {/* Input field */}
@@ -130,25 +127,18 @@ useEffect(() => {
               )}
             </Button>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-8 w-8 p-0 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              title="Search by image"
-            >
-              <ScanQrCode className="h-4 w-4 text-green-500" />
-            </Button>
+
           </div>
         </div>
       </div>
-{
-  isPending ? <LoadingFace value={6} gridvalue={3}/>: <SearchResult getSearch={getSearch} /> 
-}
-      
+      {
+        isPending ? <LoadingFace value={6} gridvalue={3} /> : <SearchResult getSearch={getSearch} />
+      }
 
-     
 
-      <SearchHistory/>
+
+
+      <SearchHistory />
     </div>
   )
 }

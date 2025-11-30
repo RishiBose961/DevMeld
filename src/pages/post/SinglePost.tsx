@@ -12,6 +12,7 @@ import JoinPay from "@/components/Secure/JoinPay";
 import { CreatePlayground } from "../PlayGround/CreatePlayground";
 import { useEffect, useState } from "react";
 import PlayGround from "../PlayGround/PlayGround";
+import UseBlockHook from "@/components/hook/postHook/UseBlockHook";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const SinglePost = () => {
     setActiveTab(value);
     setSearchParams({ tab: value }); // Update URL param
   };
+  
 
   const { isPending: loading, getValidSubmit } = UseSubmited(id as string) as {
     isPending: boolean;
@@ -39,6 +41,19 @@ const SinglePost = () => {
     isPending: boolean;
     getSingleData: any;
   };
+
+  // console.log(getSingleData.postedBy.companyName);
+  
+
+  const {isPending: blockPending, blockdata} = UseBlockHook({postId:getSingleData?.postedBy?.companyName}) as {
+    isPending: boolean;
+    blockdata: Array<{
+      blocked: { _id: string; name: string; email: string };
+    }>;
+  }
+
+  console.log(blockdata);
+  
 
   if (isPending) return <div>Loading...</div>;
 
@@ -143,12 +158,17 @@ const SinglePost = () => {
           <div>
             <h4 className="font-medium mb-2 mt-5">What You'll Gain</h4>
             <ul className="space-y-1 ">
-              {getSingleData.whatyouwillgain.map((tech: string) => (
+              {getSingleData?.whatyouwillgain.map((tech: string) => (
                 <li key={tech}>• {tech}</li>
               ))}
             </ul>
 
-            {loading ? (
+            {blockPending ? <div>Loading...</div> : blockdata ?
+            <>
+             <div className="mt-5 p-4 bg-orange-100 text-orange-800 ring-1 rounded-lg">
+              You have blocked of this problem. You cannot submit a solution.
+             </div>
+            </>: loading ? (
               <div>Loading...</div>
             ) : getValidSubmit?.value ? (
               <div className="mt-5 p-4 bg-green-100 text-green-800 ring-1 rounded-lg">

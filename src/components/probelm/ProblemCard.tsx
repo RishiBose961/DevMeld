@@ -47,7 +47,7 @@ const ProblemCard = () => {
 
                 <div className="flex items-center space-x-2 mt-1">
                   <Building2 className="w-4 h-4 " />
-                  <CompanyProfie value={problem.postedBy.companyName} id={problem.postedBy._id} />
+                  <CompanyProfie postid={problem._id} value={problem.postedBy.companyName} id={problem.postedBy._id} />
                 </div>
               </div>
             </div>
@@ -65,13 +65,13 @@ const ProblemCard = () => {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm mb-4">
             <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex items-center space-x-1">
-                <HandCoins className="size-5.5 text-amber-500" aria-hidden />
+              <div className="flex items-center text-amber-500 space-x-1">
+                <HandCoins className="size-5.5 " aria-hidden />
                 <span className="sr-only">Select Join Using Points</span>
                 <span className="font-medium">{problem.pay ?? 0}</span>
               </div>
-              <div className="flex items-center space-x-1">
-                <HandHeart className="size-5.5 text-amber-500" aria-hidden />
+              <div className="flex text-rose-400 items-center space-x-1">
+                <HandHeart className="size-5.5 " aria-hidden />
                 <span className="sr-only">Credits:</span>
                 <span className="font-medium">{problem.credits ?? 0}</span>
               </div>

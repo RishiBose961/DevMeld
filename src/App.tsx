@@ -2,20 +2,19 @@ import { Route, Routes } from "react-router";
 import { Header } from "./components/header/Header";
 import PrivateRoute from "./components/PrivateRoute";
 import useAuthEffect from "./components/useAuthEffect";
-import AchievementsPage from "./pages/Achievements/AchievementsPage";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Codesubmit from "./pages/code/Codesubmit";
 import CommunityPage from "./pages/Community/CommunityPage";
 import Home from "./pages/Home/Home";
 import LeaderBoard from "./pages/LeaderBoard/LeaderBoard";
+import PlayGoundRoom from "./pages/PlayGround/PlayGoundRoom";
+import PlayGround from "./pages/PlayGround/PlayGround";
 import SinglePost from "./pages/post/SinglePost";
 import UserProfile from "./pages/Profile/UserProfile";
 import UserStartupProfile from "./pages/Profile/UserStartupProfile";
 import SearchPage from "./pages/Search/SearchPage";
 import ViewSolution from "./pages/Solution/ViewSolution";
-import PlayGround from "./pages/PlayGround/PlayGround";
-import PlayGoundRoom from "./pages/PlayGround/PlayGoundRoom";
 
 const App = () => {
   useAuthEffect();
@@ -31,10 +30,8 @@ const App = () => {
         <Route path="/*" element={<div>404</div>} />
         <Route path="/dev/:id" element={<UserProfile />} />
         <Route path="/startup/:id" element={<UserStartupProfile />} />
-        <Route path="/achievements" element={<AchievementsPage/>} />
 
         <Route path="" element={<PrivateRoute />}>
-          <Route path="/profile" element={<div>Profile</div>} />
           <Route path="/p/:id" element={<SinglePost />} />
           <Route path="/community/:id" element={<CommunityPage />} />
           <Route path="/search" element={<SearchPage />} />

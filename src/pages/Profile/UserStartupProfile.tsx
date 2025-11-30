@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AvatarImage } from "@radix-ui/react-avatar"
 import { QrCode } from "lucide-react"
 import { useParams } from "react-router"
+import ViewStartupProfile from "./ViewStartupProfile"
 
 
 const UserStartupProfile = () => {
@@ -95,6 +96,7 @@ const UserStartupProfile = () => {
                 <Button><QrCode />QR Code</Button>
 
             </div>
+            <ViewStartupProfile id={getProfileStartup?._id} />
         </div>
     )
 }

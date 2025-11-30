@@ -98,9 +98,8 @@ const SearchRecommad = () => {
                   {item.requiredtech && item.requiredtech.length > 0 ? (item.requiredtech.map((tag) => (
                     <Badge
                       key={tag}
-                      variant="secondary"
-                      className="bg-zinc-800 text-zinc-300 hover:bg-zinc-700 border-transparent px-2 py-0.5 text-xs font-normal"
-                    >
+                    variant="outline"
+                      className="px-2 py-0.5 text-xs font-normal">
                       {tag}
                     </Badge>
                   ))) : null}
@@ -122,7 +121,7 @@ const SearchRecommad = () => {
                   </div>
                 </div>
 
-                <Link className="bg-blue-600 p-3 rounded-full" to={`/p/${item._id}`} >
+                <Link className="bg-blue-600 text-white p-3 rounded-full" to={`/p/${item._id}`} >
 
                   <Eye className="h-4 w-4 " />
 

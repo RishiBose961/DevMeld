@@ -18,7 +18,7 @@ const TitleLink = ({ text, valuetext }: TitleLinkProps) => {
     <span className={`text-${valuetext} font-semibold`}>
       {title}{" "}
       <Link
-        to={`/${username}`}
+        to={`/startup/${username}`}
         className="text-blue-500 hover:underline visited:text-purple-600"
       >
         {username}
