@@ -5,9 +5,10 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { logoutUserAction } from "@/slice/authSlice"
-import { LogOut, QrCode } from "lucide-react"
+import { LogOut, Share2 } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
+import { toast } from "sonner"
 import { SkillsDialog } from "../Skill/SkillEdit"
 import TimeLineDev from "../TimeLine/TimeLineDev"
 import { ReportCreate } from "./ReportCreate"
@@ -79,6 +80,12 @@ const UserProfile = () => {
 
   }
 
+   const handleShare = () => {
+        navigator.clipboard.writeText(`${window.location.origin}/startup/${getProfileDev?.username}`)
+        toast.success("Profile URL copied to clipboard! Share with friends.");
+    }
+
+
   return (
     <div className="mt-5">
       <Card>
@@ -146,8 +153,8 @@ const UserProfile = () => {
         )} */}
 
 
-        <Button variant="secondary" className=" cursor-pointer">
-          <QrCode />QR Code
+        <Button onClick={handleShare} variant="secondary" className=" cursor-pointer">
+          <Share2 /> Share
         </Button>
 
 

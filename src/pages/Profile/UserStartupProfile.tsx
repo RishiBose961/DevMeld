@@ -3,8 +3,9 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AvatarImage } from "@radix-ui/react-avatar"
-import { QrCode } from "lucide-react"
+import { Share2 } from "lucide-react"
 import { useParams } from "react-router"
+import { toast } from "sonner"
 import ViewStartupProfile from "./ViewStartupProfile"
 
 
@@ -39,6 +40,12 @@ const UserStartupProfile = () => {
             return iso
         }
     }
+
+    const handleShare = () => {
+        navigator.clipboard.writeText(`${window.location.origin}/startup/${getProfileStartup?.username}`)
+        toast.success("Profile URL copied to clipboard! Share with friends.");
+    }
+
 
     if (isPending) {
         return <div>Loading...</div>
@@ -92,9 +99,11 @@ const UserStartupProfile = () => {
                 </CardContent>
             </Card>
             <div className="mt-4 w-fit space-x-3 bg-card p-2 rounded-3xl">
-
-                <Button><QrCode />QR Code</Button>
-
+                <Button
+                    onClick={handleShare}
+                >
+                    <Share2 /> Share
+                </Button>
             </div>
             <ViewStartupProfile id={getProfileStartup?._id} />
         </div>

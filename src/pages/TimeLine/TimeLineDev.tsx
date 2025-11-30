@@ -31,6 +31,7 @@ const TimeLineDev = ({ id }: { id: string }) => {
                             {/* Avatar on the timeline line */}
                             <span className="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -start-4 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
                                 <Link to={`/dev/${post?.userId?.username}`}>
+                                
                                     <Avatar className="size-8">
                                         <AvatarImage
                                             src={`https://api.dicebear.com/9.x/lorelei/svg?seed=${post?.userId?.username}`}
