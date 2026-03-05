@@ -15,6 +15,7 @@ import UserProfile from "./pages/Profile/UserProfile";
 import UserStartupProfile from "./pages/Profile/UserStartupProfile";
 import SearchPage from "./pages/Search/SearchPage";
 import ViewSolution from "./pages/Solution/ViewSolution";
+import Certi from "./pages/Certi/Certi";
 
 const App = () => {
   useAuthEffect();
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/*" element={<div>404</div>} />
         <Route path="/dev/:id" element={<UserProfile />} />
         <Route path="/startup/:id" element={<UserStartupProfile />} />
+        <Route path="/certificates/:userId/:certificateId" element={<Certi />} />
 
         <Route path="" element={<PrivateRoute />}>
           <Route path="/p/:id" element={<SinglePost />} />

@@ -49,7 +49,7 @@ export function CreatePlayground({ postId }: { postId: string }) {
   const createPlaygroundMutation = useMutation({
     mutationFn: async (data: typeof newRoom) => {
       const response = await axios.post(
-        "http://localhost:5000/api/create/playground",
+        "http://localhost:5001/api/create/playground",
         data,{
             headers: {
                  Authorization: `Bearer ${user?.token}`,

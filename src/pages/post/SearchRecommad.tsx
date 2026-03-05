@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Building2, Eye, HandCoins, HandHeart, User } from "lucide-react";
 import { Link } from "react-router";
+import HoverProfile from "../Profile/HoverProfile";
 const SearchRecommad = () => {
   const { isPending, getSearchRecommd } = UseSearchRecommd() as {
     isPending: boolean;
@@ -80,7 +81,7 @@ const SearchRecommad = () => {
                           <Link to={`/startup/${item?.postedBy?.username}`}>
                             <div className="flex items-center space-x-1 cursor-pointer">
                               <User className="size-4" />
-                              <span>{item?.postedBy?.username}</span>
+                             <HoverProfile username={item?.postedBy?.username} />
 
                             </div>
                           </Link>

@@ -7,28 +7,33 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import UseSubmited from "@/components/hook/validhook/UseSubmited";
 import EditorTheme from "@/components/hook/editorTheme/EditorTheme";
+import TerminalEdit from "./TerminalEdit";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 const Codesubmit = () => {
   const location = useLocation();
+  const [showTerminal, setShowTerminal] = useState(false);
 
   const postBy = location.pathname.split("/")[4];
   const topicId = location.pathname.split("/")[2];
 
-   const { isPending: loading, getValidSubmit } = UseSubmited(topicId as string) as {
+  const { isPending: loading, getValidSubmit } = UseSubmited(topicId as string) as {
     isPending: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getValidSubmit: any;
   };
 
-  const {theme} = EditorTheme();
-  
+  const { theme } = EditorTheme();
+
   const [language, setLanguage] = useState("java");
   const [code, setCode] = useState(boilerplates["java"]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { user } = useSelector((state: any) => state.auth);
   const token = user?.token;
   const mutation = useMutation({
-    mutationFn: (postData: { code: string; language: string, postId: string,topicId: string }) =>
+    mutationFn: (postData: { code: string; language: string, postId: string, topicId: string }) =>
       createSubmissionSerivice(postData, token),
     onSuccess: () => {
       alert("Submission created successfully!");
@@ -49,7 +54,7 @@ const Codesubmit = () => {
     mutation.mutate({
       code,
       language,
-      postId:postBy,
+      postId: postBy,
       topicId
     });
   };
@@ -62,53 +67,79 @@ const Codesubmit = () => {
 
   return (
     <div className="pt-6 mb-5">
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-2">
-          Select Language
-        </label>
-        <select
-          value={language}
-          onChange={handleLanguageChange}
-          className="bg-gray-800 text-white border border-gray-600 rounded-md px-3 py-2"
-        >
-          <option value="java">Java</option>
-          <option value="javascript">JavaScript</option>
-          <option value="typescript">TypeScript</option>
-          <option value="python">Python</option>
-          <option value="cpp">C++</option>
-          <option value="c">C</option>
-          <option value="go">Go</option>
-        </select>
+      <div className="mb-6 space-x-3 flex justify-start items-center">
+        <div>
+          <select
+            value={language}
+            onChange={handleLanguageChange}
+            className="bg-gray-800 text-white border border-gray-600 rounded-md px-3 py-2"
+          >
+            <option value="java">Java</option>
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+            <option value="c">C</option>
+            <option value="go">Go</option>
+          </select>
+        </div>
+
+        {
+          loading ? (
+            <div>Loading...</div>
+          ) : getValidSubmit?.value ? (
+            <div className="p-4 bg-green-100 text-green-800 rounded-md">
+              You have already submitted a solution for this topic.
+            </div>
+          ) : <Button
+            onClick={handleSubmit}
+            variant="outline"
+            className=" cursor-pointer font-mono"
+          >
+            Submit Solution
+          </Button>
+        }
+        <div className="flex items-center space-x-2">
+          <Switch
+            id="terminal-mode"
+            checked={showTerminal}
+            onCheckedChange={setShowTerminal}
+          />
+          <Label htmlFor="terminal-mode">
+            {showTerminal ? "Terminal ON" : "Terminal OFF"}
+          </Label>
+        </div>
       </div>
 
-      <div className="space-y-4">
-        <div>
+      <div className={`space-y-4 grid gap-5 ${showTerminal ? "grid-cols-3" : "grid-cols-1"}`}>
+        <div className=" col-span-2">
           <label className="block text-sm font-medium mb-2">
             Code Solution
           </label>
           <Editor
-            height="50vh"
+            height="70vh"
             language={language}
             theme={theme}
             value={code}
             onChange={(value) => setCode(value ?? "")}
           />
+
         </div>
-        {
-          loading ? (
-            <div>Loading...</div>
-          ) :  getValidSubmit?.value  ? (
-            <div className="p-4 bg-green-100 text-green-800 rounded-md">
-              You have already submitted a solution for this topic.
+        <div className="space-y-4">
+
+          {/* Toggle */}
+
+
+          {/* Terminal */}
+          {showTerminal && (
+            <div>
+              <TerminalEdit language={language} code={code} />
             </div>
-          ) :  <button
-          onClick={handleSubmit}
-          className="bg-primary text-white font-bold px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
-        >
-          Submit Solution
-        </button>
-        }
-       
+          )}
+
+        </div>
+
+
       </div>
     </div>
   );

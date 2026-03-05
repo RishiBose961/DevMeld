@@ -1,20 +1,22 @@
 import UseTimeLineHook from "@/components/hook/postHook/UseTimeLineHook";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router";
-import { Loader2 } from "lucide-react"; // optional loading icon
+import { Loader2, Medal } from "lucide-react"; // optional loading icon
 
 const TimeLineDev = ({ id }: { id: string }) => {
     const { isPending, getTimeLine } = UseTimeLineHook({ timelineid: id }) as {
         isPending: boolean;
         getTimeLine: Array<{
             _id: string;
-            userId: { fullName: string; username: string };
+            userId: { fullName: string; username: string; _id: string };
             code: string;
             language: string;
             createdAt?: string;
+            status: string;
             topicId?: { _id: string; title: string };
         }>;
     }
+
 
     return (
         <div className="mt-4">
@@ -31,7 +33,7 @@ const TimeLineDev = ({ id }: { id: string }) => {
                             {/* Avatar on the timeline line */}
                             <span className="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -start-4 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
                                 <Link to={`/dev/${post?.userId?.username}`}>
-                                
+
                                     <Avatar className="size-8">
                                         <AvatarImage
                                             src={`https://api.dicebear.com/9.x/lorelei/svg?seed=${post?.userId?.username}`}
@@ -51,10 +53,10 @@ const TimeLineDev = ({ id }: { id: string }) => {
                                             ? new Date(post.createdAt).toLocaleString()
                                             : "just now"}
                                     </time>
-                                    <div className="text-sm text-gray-500 dark:text-gray-300">
+                                    <div className="text-sm gap-2 flex items-center text-gray-500 dark:text-gray-300">
                                         <span className="font-semibold text-blue-600 dark:text-blue-400">
                                             {post?.userId?.username}
-                                        </span>{" "}
+                                        </span>{"  "}
                                         Recently Completed Submissions{" "}
                                         <Link
                                             to={`/p/${post?.topicId?._id}`}
@@ -64,6 +66,11 @@ const TimeLineDev = ({ id }: { id: string }) => {
                                         </Link>
                                         <span className="bg-gray-100 text-gray-800 text-xs font-normal px-2 py-0.5 rounded-sm ml-2 dark:bg-gray-600 dark:text-gray-300">
                                             {post?.language}
+                                        </span>
+                                        <span>
+
+                                            {post?.status === "Accepted" ? <Link to={`/certificates/${post?.userId?._id}/${post?._id}`}><Medal /></Link> : null}
+
                                         </span>
                                     </div>
                                 </div>

@@ -52,8 +52,6 @@ const SinglePost = () => {
     }>;
   }
 
-  console.log(blockdata);
-  
 
   if (isPending) return <div>Loading...</div>;
 

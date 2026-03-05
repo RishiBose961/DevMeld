@@ -32,7 +32,7 @@ interface RoomState {
 
 const PlayGoundRoom = () => {
   const { roomName } = useParams<{ roomName: string, postId: string }>();
-  
+
   const navigate = useNavigate();
 
   const { user } = useSelector((state: RootState) => state.auth);
@@ -45,11 +45,11 @@ const PlayGoundRoom = () => {
 
   const editorRef = useRef<any>(null);
   const socketRef = useRef<Socket | null>(null);
-  const typingTimeout = useRef<NodeJS.Timeout | null>(null);
+  const typingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const REALTIME_SERVER = "http://localhost:5001";
 
-  const {theme} = EditorTheme();
+  const { theme } = EditorTheme();
 
   useEffect(() => {
     const socketIo: Socket = io(REALTIME_SERVER);
@@ -170,6 +170,10 @@ const PlayGoundRoom = () => {
 
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
+    editor.onDidChangeCursorPosition((e) => {
+      console.log("Current Line:", e.position.lineNumber);
+    });
+
   };
 
   const leaveRoom = () => {
@@ -203,6 +207,7 @@ const PlayGoundRoom = () => {
             fontSize: 20,
             wordWrap: "on",
             automaticLayout: true,
+            lineNumbers: "on",
           }}
         />
       </div>

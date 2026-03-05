@@ -50,6 +50,28 @@
   --shadow-2xl: 2px 2px 10px 4px hsl(240 4% 60% / 0.45);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+    --cert-gold: 38 70% 45%;
+    --cert-gold-light: 40 65% 65%;
+    --cert-gold-dark: 36 75% 30%;
+    --cert-cream: 42 40% 95%;
+    --cert-navy: 220 50% 20%;
+    --cert-teal: 175 50% 35%;
+    --cert-burgundy: 345 60% 30%;
+    --cert-border-ornate: 38 50% 60%;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --font-elegant: 'Cormorant Garamond', serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 }
 
 .dark {

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Building2, Eye, HandCoins, HandHeart, User } from "lucide-react";
 import { Link } from "react-router";
+import HoverProfile from "../Profile/HoverProfile";
 
 const Recommad = () => {
   const { isPending, getRecommad } = UseRecommd() as {
@@ -80,17 +81,18 @@ const Recommad = () => {
                         ) : null}
                       </div>
                       <div className="flex items-center gap-1">
-                        
+
                         {item.postedBy?.username ? (
                           <Link to={`/startup/${item?.postedBy?.username}`}>
                             <div className="flex items-center space-x-1 cursor-pointer">
-                             <User className="size-4" />
-                              <span>{item?.postedBy?.username}</span>
+                              <User className="size-4" />
 
+                              <HoverProfile username={item?.postedBy?.username} />
                             </div>
                           </Link>
                         ) : null}
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -127,16 +129,16 @@ const Recommad = () => {
                   </div>
                 </div>
 
-                 <Link className="bg-blue-600 text-white p-3 rounded-full" to={`/p/${item._id}`} >
+                <Link className="bg-blue-600 text-white p-3 rounded-full" to={`/p/${item._id}`} >
                   <Eye className="h-4 w-4 " />
                 </Link>
 
               </CardFooter>
 
-             
+
               <div className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </Card>
-          
+
           )
         )}
       </div>

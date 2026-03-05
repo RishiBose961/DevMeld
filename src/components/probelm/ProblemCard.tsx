@@ -5,6 +5,7 @@ import TitleLink from "../Link/TitleLink";
 import LoadingFace from "../Loading/LoadingFace";
 import CompanyProfie from "../profie/CompanyProfie";
 import { Badge } from "../ui/badge";
+import HoverProfile from "@/pages/Profile/HoverProfile";
 
 
 interface Problem {
@@ -34,7 +35,7 @@ const ProblemCard = () => {
     </>;
   }
   return (
-     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {getDevRecom.map((problem: Problem, index: number) => (
         <div
           key={index}
@@ -75,12 +76,13 @@ const ProblemCard = () => {
                 <span className="sr-only">Credits:</span>
                 <span className="font-medium">{problem.credits ?? 0}</span>
               </div>
-              
+
             </div>
             <Link to={`/startup/${problem?.postedBy?.username}`}>
               <div className="flex items-center space-x-1 cursor-pointer hover:text-blue-500 transition-colors">
                 <User2 className="size-5.5" />
-                <span>{problem?.postedBy?.username}</span>
+                <HoverProfile username={problem?.postedBy?.username} />
+
               </div>
             </Link>
           </div>
