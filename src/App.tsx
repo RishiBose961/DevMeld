@@ -4,6 +4,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import useAuthEffect from "./components/useAuthEffect";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import Certi from "./pages/Certi/Certi";
 import Codesubmit from "./pages/code/Codesubmit";
 import CommunityPage from "./pages/Community/CommunityPage";
 import Home from "./pages/Home/Home";
@@ -15,7 +16,6 @@ import UserProfile from "./pages/Profile/UserProfile";
 import UserStartupProfile from "./pages/Profile/UserStartupProfile";
 import SearchPage from "./pages/Search/SearchPage";
 import ViewSolution from "./pages/Solution/ViewSolution";
-import Certi from "./pages/Certi/Certi";
 
 const App = () => {
   useAuthEffect();

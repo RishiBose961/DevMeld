@@ -26,7 +26,7 @@ const Index = () => {
 
 
   const [selectedTemplate, setSelectedTemplate] = useState("classic");
- 
+
   const certRef = useRef<HTMLDivElement>(null);
 
   const { isPending, getUserCertificate } = UseCertificate(userId, certificateIds) as {
@@ -39,8 +39,8 @@ const Index = () => {
     }>;
   };
 
- 
-  
+
+
 
 
 
@@ -54,7 +54,7 @@ const Index = () => {
       link.download = `certificate-${getUserCertificate?.[0]?.userId?.fullName || "unnamed"}.png`;
       link.href = dataUrl;
       link.click();
-      alert("Certificate saved as PNG." );
+      alert("Certificate saved as PNG.");
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       alert({ title: "Error", description: "Failed to generate image.", variant: "destructive" });
@@ -80,7 +80,7 @@ const Index = () => {
   }, []);
 
 
-   if (isPending) {
+  if (isPending) {
     return (
       <div className="flex items-center justify-center text-gray-500 py-6">
         Loading certificate...
@@ -93,7 +93,25 @@ const Index = () => {
     <div>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+
+
+          {/* Template selector */}
+          <div className="flex gap-3">
+            {templates.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setSelectedTemplate(t.id)}
+                className={`font-body text-sm px-4 py-2 rounded-md border transition-all ${selectedTemplate === t.id
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-muted-foreground border-border hover:border-primary/50"
+                  }`}
+              >
+                {t.name}
+              </button>
+            ))}
+          </div>
+
           <div className="flex items-end gap-2">
             <Button onClick={handleDownload} className="flex-1 gap-2">
               <Download className="w-4 h-4" /> Download
@@ -101,31 +119,16 @@ const Index = () => {
             <Button onClick={handleShare} variant="outline" className="flex-1 gap-2">
               <Share2 className="w-4 h-4" /> Share
             </Button>
+
           </div>
         </div>
 
-        {/* Template selector */}
-        <div className="flex gap-3 mb-6">
-          {templates.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setSelectedTemplate(t.id)}
-              className={`font-body text-sm px-4 py-2 rounded-md border transition-all ${selectedTemplate === t.id
-                ? "bg-primary text-primary-foreground border-primary"
-                : "bg-card text-muted-foreground border-border hover:border-primary/50"
-                }`}
-            >
-              {t.name}
-            </button>
-          ))}
-        </div>
-
         {/* Certificate preview */}
-        <div className="overflow-x-auto pb-4">
+        <div className="overflow-x-auto pb-4 flex justify-center">
           <div className="inline-block rounded-lg overflow-hidden shadow-2xl" ref={certRef}>
             <ActiveTemplate
               recipientName={getUserCertificate?.[0]?.userId?.fullName || "Recipient Name"}
-              courseName={` ${getUserCertificate?.[0]?.topicId?.title  || "Name of the course"} - (${getUserCertificate?.[0]?.status || "Status"})`}
+              courseName={` ${getUserCertificate?.[0]?.topicId?.title || "Name of the course"} - (${getUserCertificate?.[0]?.status || "Status"})`}
               date={getUserCertificate?.[0]?.createdAt ? new Date(getUserCertificate?.[0]?.createdAt).toLocaleDateString() : "Date"}
               certificateId={certificateIds}
               user={userId}

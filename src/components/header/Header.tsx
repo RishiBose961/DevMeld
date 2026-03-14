@@ -1,12 +1,16 @@
-import { Code, Search, Trophy } from "lucide-react";
+import { Code, Languages, Search, Trophy } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router";
 import Avatars from "../Avatar/Avatars";
 import useCreditHook from "../hook/creditHook/useCreditHook";
 import { ModeToggle } from "../mode-toggle";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import Language from "../Language/Language";
 
 export const Header = () => {
+  const [showInput, setShowInput] = useState(false);
+
   const { isAuthenticated, user } = useSelector(
     (state: {
       auth: {
@@ -36,7 +40,7 @@ export const Header = () => {
           {/* Logo */}
           <Link to="/">
             <div className="flex items-center space-x-2">
-        <img src="/logo.png" alt="Logo" className="size-10" />
+              <img src="/logo.png" alt="Logo" className="size-10" />
               <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                 DevMeld
               </h1>
@@ -68,6 +72,21 @@ export const Header = () => {
             {/* <Notificationcomp /> */}
 
             <ModeToggle />
+            <div className="relative">
+              <button
+                onClick={() => setShowInput(!showInput)}
+                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              >
+                <Languages size={22} />
+              </button>
+              {/* Language Input */}
+              {showInput && (
+                <div className="absolute right-0 mt-2 z-20 bg-amber-50 shadow-lg p-3 rounded-lg w-fit">
+                  <Language />
+                </div>
+              )}
+
+            </div>
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
                 <div className="text-right hidden sm:block">

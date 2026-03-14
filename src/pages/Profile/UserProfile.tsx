@@ -81,7 +81,7 @@ const UserProfile = () => {
   }
 
    const handleShare = () => {
-        navigator.clipboard.writeText(`${window.location.origin}/startup/${getProfileDev?.username}`)
+        navigator.clipboard.writeText(`${window.location.origin}/dev/${getProfileDev?.username}`)
         toast.success("Profile URL copied to clipboard! Share with friends.");
     }
 
