@@ -1,4 +1,5 @@
 import useRankHook from "@/components/hook/creditHook/useRankHook";
+import Rankupcomp from "@/components/Rankup/Rankupcomp";
 import { Button } from "@/components/ui/button"
 import {
     Table,
@@ -37,7 +38,11 @@ const LeaderBoard = () => {
 
     return (
         <>
-        <p className="text-2xl font-bold mt-2">Leaderboard</p>
+        <div>
+            <h1 className="text-2xl font-bold mt-2">Level Up</h1>
+            <Rankupcomp/>
+        </div>
+        <p className="text-2xl font-bold mt-5">Leaderboard</p>
         <div className="bg-card mt-3 rounded-xl p-2">
             <Table>
             <TableCaption>Rank Leaderboard</TableCaption>

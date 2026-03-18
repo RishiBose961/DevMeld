@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-var */
+
 
 import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";

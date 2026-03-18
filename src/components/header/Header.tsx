@@ -47,7 +47,7 @@ export const Header = () => {
             </div>
           </Link>
           {/* Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 bg-primary/20 rounded-xl">
             {navItems.map(({ id, label, icon: Icon, href }) => (
               <NavLink
                 key={id}
