@@ -42,7 +42,7 @@ const { user } = useSelector(
     },
   })
 
-  // ✅ run only when token exists
+
   React.useEffect(() => {
     if (token) {
       mutate()

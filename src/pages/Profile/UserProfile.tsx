@@ -11,6 +11,7 @@ import { useParams } from "react-router"
 import { toast } from "sonner"
 import { SkillsDialog } from "../Skill/SkillEdit"
 import TimeLineDev from "../TimeLine/TimeLineDev"
+import GithubButton from "./GithubButton"
 import { ReportCreate } from "./ReportCreate"
 
 const UserProfile = () => {
@@ -80,10 +81,10 @@ const UserProfile = () => {
 
   }
 
-   const handleShare = () => {
-        navigator.clipboard.writeText(`${window.location.origin}/dev/${getProfileDev?.username}`)
-        toast.success("Profile URL copied to clipboard! Share with friends.");
-    }
+  const handleShare = () => {
+    navigator.clipboard.writeText(`${window.location.origin}/dev/${getProfileDev?.username}`)
+    toast.success("Profile URL copied to clipboard! Share with friends.");
+  }
 
 
   return (
@@ -151,6 +152,11 @@ const UserProfile = () => {
             Follow
           </Button>
         )} */}
+        {
+          user?._id === getProfileDev?._id && (<GithubButton />
+          )
+        }
+
 
 
         <Button onClick={handleShare} variant="secondary" className=" cursor-pointer">
