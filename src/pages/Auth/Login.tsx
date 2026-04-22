@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -62,13 +63,23 @@ export default function Login() {
       toast.success("Logged in successfully!");
       navigate("/");
     },
-    onError: (error: unknown) => {
-      const errorMessage =
-        error && typeof error === "object" && "message" in error
-          ? (error as { message?: string }).message
-          : "Something went wrong";
-      toast.error(errorMessage || "Something went wrong");
-    },
+   onError: (error: unknown) => {
+
+
+  let message = "Something went wrong";
+
+  if (error && typeof error === "object") {
+    const err = error as any;
+
+    message =
+      err?.response?.data?.message ||   // backend message
+      err?.response?.data ||     // alternative backend key
+      err?.message ||                  // JS error message
+      message;
+  }
+
+  toast.error(String(message)); // 🔥 always string
+}
   });
 
   const onSubmit: SubmitHandler<IFormInputLogin> = (data) => {

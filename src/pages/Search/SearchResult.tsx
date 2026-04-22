@@ -28,14 +28,14 @@ const SearchResult = ({ getSearch }: SearchResultProps) => {
   return (
     <div className="grid grid-cols-3 mt-5 gap-4">
       {results.map((item, idx) => {
-        if (item.title) {
+        if (item?.title) {
           return (
             <div key={idx} className="p-4 h-56 ring-1 rounded-lg shadow">
-              <h2 className="text-lg font-bold">{item.title}</h2>
+              <h2 className="text-lg font-bold">{item?.title}</h2>
 
               <div className="space-y-4 mt-3 space-x-3">
-                {Array.isArray(item.requiredtech) &&
-                  item.requiredtech.map((tech, i) => (
+                {Array.isArray(item?.requiredtech) &&
+                  item?.requiredtech.map((tech, i) => (
                     <Badge
                       key={`${tech}-${i}`}
                       variant="secondary"
@@ -47,11 +47,11 @@ const SearchResult = ({ getSearch }: SearchResultProps) => {
               </div>
 
               <p className="text-xs text-gray-400">
-                Posted by: {item.postedBy?.username || "Unknown"}
+                Posted by: {item?.postedBy?.username || "Unknown"}
               </p>
-              <p>{item.postedBy?.companyName}</p>
+              <p>{item?.postedBy?.companyName}</p>
               <div className="space-x-3 pt-2">
-                <Link to={`/p/${item._id}`}>
+                <Link to={`/p/${item?._id}`}>
                   <Button>
                     <Eye />
                   </Button>
@@ -72,16 +72,16 @@ const SearchResult = ({ getSearch }: SearchResultProps) => {
                   alt="avatar"
                 />
               </div>
-              {item.role === "developer" ? (
+              {item?.role === "developer" ? (
                 <Badge className="font-bold bg-amber-600">Developer</Badge>
               ) : (
                 <Badge className="font-bold bg-red-400">Startup</Badge>
               )}
 
-              <h2 className="text-lg font-bold">{item.fullName}</h2>
+              <h2 className="text-lg font-bold">{item?.fullName}</h2>
               <p className="text-sm">{item?.username}</p>
               <div className="space-x-3 pt-2">
-                {item.role === "developer" ? (
+                {item?.role === "developer" ? (
                   <Link to={`/dev/${item?.username}`}>
                     <Button>
                       <User />

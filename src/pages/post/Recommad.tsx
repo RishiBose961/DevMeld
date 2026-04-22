@@ -39,8 +39,12 @@ const Recommad = () => {
     </>;
   }
 
-
-
+  const hasDiagram = (text: string) => {
+    return (
+      /\n/?.test(text) &&
+      (/\*/.test(text) || /#/.test(text) || / {2,}/.test(text))
+    );
+  };
   return (
     <>
       <p className="text-xl font-bold">Recommendation</p>
@@ -66,23 +70,23 @@ const Recommad = () => {
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-1">
                     <h3 className="font-semibold leading-tight tracking-tight  group-hover:text-blue-400 transition-colors">
-                      {item.title}
+                      {item?.title}
 
                     </h3>
                     <div className="flex items-center gap-3 text-xs text-zinc-400">
                       <div className="flex items-center gap-1">
-                        {item.postedBy?.companyName ? (
+                        {item?.postedBy?.companyName ? (
                           <span className="inline-flex items-center gap-1">
                             <Building2 className="size-4" aria-hidden />
                             <span className="sr-only">Company:</span>
-                            <CompanyProfie value={item.postedBy.companyName} postid={item._id} id={item.postedBy._id ?? ""} />
+                            <CompanyProfie value={item?.postedBy?.companyName} postid={item._id} id={item?.postedBy?._id ?? ""} />
 
                           </span>
                         ) : null}
                       </div>
                       <div className="flex items-center gap-1">
 
-                        {item.postedBy?.username ? (
+                        {item?.postedBy?.username ? (
                           <Link to={`/startup/${item?.postedBy?.username}`}>
                             <div className="flex items-center space-x-1 cursor-pointer">
                               <User className="size-4" />
@@ -99,10 +103,19 @@ const Recommad = () => {
               </CardHeader>
 
               <CardContent className="flex-1 pb-4">
-                <p className="mb-6 text-sm leading-relaxed text-zinc-400 line-clamp-3">{item.description}</p>
-
+                {
+                  hasDiagram(item?.description) ? (
+                    <pre className="mb-6 text-sm leading-relaxed text-zinc-400">
+                      {item?.description}
+                    </pre>
+                  ) : (
+                    <p className="mb-6 text-sm leading-relaxed text-zinc-400 line-clamp-3">
+                      {item?.description}
+                    </p>
+                  )
+                }
                 <div className="flex flex-wrap gap-1.5">
-                  {item.requiredtech && item.requiredtech.length > 0 ? (item.requiredtech.map((tag) => (
+                  {item?.requiredtech && item?.requiredtech.length > 0 ? (item?.requiredtech.map((tag) => (
                     <Badge
                       key={tag}
                       variant="outline"
@@ -119,17 +132,17 @@ const Recommad = () => {
                   <div className="flex items-center gap-1.5 text-amber-400/90">
                     <HandCoins className="h-4 w-4" />
                     <span className="sr-only">Select Join Using Points</span>
-                    <span className="font-medium">{item.pay ?? 0}</span>
+                    <span className="font-medium">{item?.pay ?? 0}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-rose-400/90">
                     <HandHeart className="size-5 " aria-hidden />
                     <span className="sr-only">Credits:</span>
-                    <span className="font-medium">{item.credits ?? 0}</span>
+                    <span className="font-medium">{item?.credits ?? 0}</span>
 
                   </div>
                 </div>
 
-                <Link className="bg-blue-600 text-white p-3 rounded-full" to={`/p/${item._id}`} >
+                <Link className="bg-blue-600 text-white p-3 rounded-full" to={`/p/${item?._id}`} >
                   <Eye className="h-4 w-4 " />
                 </Link>
 

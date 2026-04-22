@@ -24,7 +24,7 @@ const quotes = [
 export default function QuoteBox() {
   const [index, setIndex] = useState(0);
 
-  const {isPending,newPosts} = UseNewPost() as {
+  const { isPending, newPosts } = UseNewPost() as {
     isPending: boolean;
     newPosts: Array<{
       _id: string;
@@ -58,6 +58,12 @@ export default function QuoteBox() {
     </>;
   }
 
+  const hasDiagram = (text: string) => {
+    return (
+      /\n/.test(text) &&
+      (/\*/.test(text) || /#/.test(text) || / {2,}/.test(text))
+    );
+  };
 
   return (
     <div className=" text-lg font-semibold">
@@ -117,8 +123,16 @@ export default function QuoteBox() {
               </CardHeader>
 
               <CardContent className="flex-1 pb-4">
-                <p className="mb-6 text-sm leading-relaxed text-zinc-400 line-clamp-3">{item.description}</p>
-
+                {hasDiagram(item.description) ? (
+                  <pre className="mb-6 text-sm leading-relaxed text-zinc-400">
+                    {item.description}
+                  </pre>
+                ) : (
+                  <p className="mb-6 text-sm leading-relaxed text-zinc-400 line-clamp-3">
+                    {item.description}
+                  </p>
+                )
+                }
                 <div className="flex flex-wrap gap-1.5">
                   {item.requiredtech && item.requiredtech.length > 0 ? (item.requiredtech.map((tag) => (
                     <Badge

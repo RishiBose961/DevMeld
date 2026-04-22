@@ -48,6 +48,12 @@ export default function JoinPay({
           },
         }
       )
+
+      if (res.data.message === "Insufficient credits to claim pay for this work.") {
+        throw new Error("Failed to create work")
+      }
+
+    
       return res.data
     },
     onSuccess: () => {
@@ -61,7 +67,7 @@ export default function JoinPay({
     },
     onError: (err: any) => {
       console.error("Error creating work:", err)
-      alert("Failed to join — please try again.")
+      alert("Failed to join the work. Please check your points and try again.")
       setIsChecked(false)
     },
   })

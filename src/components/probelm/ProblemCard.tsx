@@ -34,12 +34,20 @@ const ProblemCard = () => {
       <LoadingFace value={6} gridvalue={3} />
     </>;
   }
+
+  const hasDiagram = (text: string) => {
+    return (
+      /\n/.test(text) &&
+      (/\*/.test(text) || /#/.test(text) || / {2,}/.test(text))
+    );
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
       {getDevRecom.map((problem: Problem, index: number) => (
         <div
           key={index}
-          className="rounded-xl bg-card border border-gray-600 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-300 cursor-pointer group"
+         className="break-inside-avoid rounded-xl bg-card border border-gray-600 p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-300 cursor-pointer group"
         >
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center space-x-3">
@@ -54,7 +62,17 @@ const ProblemCard = () => {
             </div>
           </div>
 
-          <p className=" text-sm mb-4 line-clamp-2">{problem.description}</p>
+          {
+            hasDiagram(problem.description) ? (
+              <pre className="mb-6 text-sm leading-relaxed text-zinc-400">
+                {problem.description}
+              </pre>
+            ) : (
+              <p className="mb-6 text-sm leading-relaxed text-zinc-400 line-clamp-3">
+                {problem.description}
+              </p>
+            )
+          }
 
           <div className="flex flex-wrap gap-2 mb-4">
             {problem.requiredtech.map((tech: string, i: number) => (

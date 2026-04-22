@@ -13,6 +13,7 @@ import { CreatePlayground } from "../PlayGround/CreatePlayground";
 import { useEffect, useState } from "react";
 import PlayGround from "../PlayGround/PlayGround";
 import UseBlockHook from "@/components/hook/postHook/UseBlockHook";
+import ShowInforamtion from "./ShowInforamtion";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -55,8 +56,9 @@ const SinglePost = () => {
 
   if (isPending) return <div>Loading...</div>;
 
+  
   return (
-    <div className="space-y-6 mx-2 mt-2">
+    <div className="space-y-6 mx-2 mt-2 mb-14">
       {/* Header */}
       <div className="flex items-center space-x-4">
         <div className="flex-1">
@@ -136,9 +138,11 @@ const SinglePost = () => {
         <TabsContent value="description">
           <div>
             <h3 className="text-lg font-semibold mb-3">Problem Description</h3>
-            <p className="leading-relaxed">{getSingleData.description}</p>
+              <pre>{getSingleData.description}</pre>
+            {/* <p className="leading-relaxed">{getSingleData.description}</p> */}
           </div>
 
+<ShowInforamtion postId={getSingleData._id} />
           <div>
             <h4 className="font-medium mb-2 mt-4">Required Technologies</h4>
             <div className="flex flex-wrap gap-2">
