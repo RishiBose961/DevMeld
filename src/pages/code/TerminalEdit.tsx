@@ -81,9 +81,11 @@ console.log("Hello from backend 🚀")
       {
         onSuccess: (data) => {
 
-          termRef.current?.writeln(
-            `\x1b[30;42m ${language.toUpperCase()} \x1b[0m Output: ${data || "No output"}`
-          )
+       termRef.current?.writeln(
+  `\n\x1b[30;42m ${language.toUpperCase()} \x1b[0m Output:\n`
+)
+
+termRef.current?.writeln(data || "No output")
         },
         onError: (err: { message: string }) => {
           termRef.current?.writeln("Error: " + err.message)
