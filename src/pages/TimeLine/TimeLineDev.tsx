@@ -2,8 +2,18 @@ import UseTimeLineHook from "@/components/hook/postHook/UseTimeLineHook";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router";
 import { Loader2, Medal } from "lucide-react"; // optional loading icon
+import { useSelector } from "react-redux";
 
 const TimeLineDev = ({ id }: { id: string }) => {
+
+     const { user } = useSelector(
+    (state: {
+      auth: {
+        isAuthenticated: boolean;
+        user: { token: string; _id: string; username: string };
+      };
+    }) => state.auth
+  );
     const { isPending, getTimeLine } = UseTimeLineHook({ timelineid: id }) as {
         isPending: boolean;
         getTimeLine: Array<{
@@ -69,7 +79,7 @@ const TimeLineDev = ({ id }: { id: string }) => {
                                         </span>
                                         <span>
 
-                                            {post?.status === "Accepted" ? <Link to={`/certificates/${post?.userId?._id}/${post?._id}`}><Medal /></Link> : null}
+                                            {user && post?.status === "Accepted" ? <Link to={`/certificates/${post?.userId?._id}/${post?._id}`}><Medal /></Link> : null}
 
                                         </span>
                                     </div>
